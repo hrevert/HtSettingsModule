@@ -1,0 +1,35 @@
+{
+    "name": "hrevert/ht-settings-module",
+    "description": "Flexible Settings module for Zend Framework 2 applications",
+    "type": "library",
+    "keywords": [
+        "zf2",
+        "module",
+        "zendframework",
+        "settings"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/hrevert/HtSettingsModule",
+    "authors": [
+        {
+            "name": "Hrevert Technologies",
+            "email": "info@hrevert.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zend-mvc": "~2.2",
+        "zendframework/zend-servicemanager": "~2.2",
+        "zendframework/zend-modulemanager": "~2.2",
+        "zendframework/zend-stdlib": "~2.2",
+        "zf-commons/zfc-base": "0.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "HtSettingsModule\\": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
