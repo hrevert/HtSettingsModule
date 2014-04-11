@@ -4,7 +4,7 @@ namespace HtSettingsModule\Options;
 use Zend\Stdlib\AbstractOptions;
 use HtSettingsModule\Exception;
 
-class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
+class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, DbOptionsInterface
 {
     /**
      * @var CacheOptionsInterface
@@ -15,6 +15,16 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      * @var array
      */
     protected $namespaces = [];
+
+    /**
+     * @var string
+     */
+    protected $settingsTable;
+
+    /**
+     * @var string
+     */
+    protected $parameterEntityClass;
 
     /**
      * Sets options of cache
@@ -89,5 +99,47 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
         }
 
         return $this->namespaces[$namespace];
+    }
+
+    /**
+     * Sets table name of settings
+     *
+     * @param string|\Zend\Db\Sql\TableIdentifier $settingsTable
+     * @return self
+     */
+    public function setSettingsTable($settingsTable)
+    {
+        $this->settingsTable = $settingsTable;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSettingsTable()
+    {
+        return $this->settingsTable;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParameterEntityClass()
+    {
+        return $this->parameterEntityClass;
+    }
+
+    /**
+     * Sets parameter entity class
+     *
+     * @param string $parameterEntityClass
+     * @return self
+     */
+    public function setParameterEntityClass($parameterEntityClass)
+    {
+        $this->parameterEntityClass = $parameterEntityClass;
+
+        return $this;
     }
 }
