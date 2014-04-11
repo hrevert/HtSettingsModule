@@ -2,14 +2,19 @@
 namespace HtSettingsModule\Options;
 
 use Zend\Stdlib\AbstractOptions;
-use HtSettingsModule\Exception\InvalidArgumentException;
+use HtSettingsModule\Exception;
 
-class ModuleOptions extends AbstractOptions
+class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
 {
     /**
      * @var CacheOptionsInterface
      */
     protected $cacheOptions;
+
+    /**
+     * @var array
+     */
+    protected $namespaces = [];
 
     /**
      * Sets options of cache
@@ -24,7 +29,7 @@ class ModuleOptions extends AbstractOptions
         } elseif (is_array($cacheOptions)) {
             $this->cacheOptions = new CacheOptions($cacheOptions);   
         } else {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 sprintf(
                     '%s expects parameter 1 to be array or an instance of HtSettingsModule\Options\CacheOptionsInterface, %s provided instead',
                     __METHOD__,
@@ -37,10 +42,7 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     * Gets options of cache
-     *
-     * @param CacheOptionsInterface
-     * @return self
+     * {@inheritDoc}
      */
     public function getCacheOptions()
     {
@@ -49,5 +51,43 @@ class ModuleOptions extends AbstractOptions
         }
 
         return $this->cacheOptions;
+    }
+
+    /**
+     * Sets namespaces
+     *
+     * @param array $namespaces
+     * @return void
+     */
+    public function setNamespaces(array $namespaces)
+    {
+        $this->namespaces = [];
+        foreach ($namespaces as $namespace => $namespaceOptions) {
+            $namespaceOptions = new NamespaceOptions($namespaceOptions);
+            $namespaceOptions->setName($namespace);
+            $this->namespaces[$namespace] = $namespaceOptions;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNamespaces()
+    {
+        return $this->namespaces;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNamespaceOptions($namespace)
+    {
+        if (!isset($this->namespaces[$namespace])) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Options Namespace, "%s" does not exist!', $namespace)
+            );            
+        }
+
+        return $this->namespaces[$namespace];
     }
 }

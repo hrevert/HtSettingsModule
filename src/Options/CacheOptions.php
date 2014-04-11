@@ -12,7 +12,7 @@ class CacheOptions extends AbstractOptions implements CacheOptionsInterface
     protected $enabled = false;
 
     /**
-     * @var string|\Zend\Cache\Storage\Adapter\StorageInterface|null
+     * @var string|\Zend\Cache\Storage\Adapter\StorageInterface|array|null
      */
     protected $adapter;
 
@@ -22,7 +22,10 @@ class CacheOptions extends AbstractOptions implements CacheOptionsInterface
     protected $namespaces = [];
 
     /**
-     * {@inheritDoc}
+     * Enables or disables cache feature
+     *
+     * @param bool $flag
+     * @return self
      */
     public function setEnabled($flag = true)
     {
@@ -40,7 +43,10 @@ class CacheOptions extends AbstractOptions implements CacheOptionsInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets cache adapter for caching
+     *
+     * @param string|\Zend\Cache\Storage\Adapter\StorageInterface $adapter
+     * @return self
      */
     public function setAdapter($adapter)
     {

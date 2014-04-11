@@ -4,17 +4,23 @@ namespace HtSettingsModule\Options;
 interface CacheOptionsInterface
 {
     /**
-     * Enables or disables cache feature
-     *
-     * @param bool $flag
-     * @return self
-     */
-    public function setEnabled($flag = true);
-
-    /**
      * Checks if cache is enabled
      *
      * @return bool
      */    
-    public function getEnabled(); 
+    public function isEnabled(); 
+
+    /**
+     * Gets cache adapter of one or more namespaces
+     *
+     * @return string|\Zend\Cache\Storage\Adapter\StorageInterface|array
+     */
+    public function getAdapter();
+
+    /**
+     * Gets namespaces that can be cached
+     *
+     * @return array
+     */
+    public function getNamespaces();
 }
