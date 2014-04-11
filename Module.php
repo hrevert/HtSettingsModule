@@ -40,6 +40,14 @@ class Module implements
      */
     public function getServiceConfig()
     {
-        return [];
+        return [
+            'factories' => [
+                'HtSettingsModule\Options\ModuleOptions' => 'HtSettingsModule\Factory\ModuleOptionsFactory',
+                'HtSettingsModule_SettingsMappers' => 'HtSettingsModule\Factory\SettignsMapperFactory',
+            ],
+            'aliases' => [
+                'HtSettingsModule\DbAdapter' => 'Zend\Db\Adapter\Adapter',
+            ]
+        ];
     }
 }

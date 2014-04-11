@@ -17,7 +17,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     protected $namespaces = [];
 
     /**
-     * @var string
+     * @var string|\Zend\Db\Sql\TableIdentifier
      */
     protected $settingsTable;
 
