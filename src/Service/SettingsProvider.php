@@ -2,8 +2,9 @@
 namespace HtSettingsModule\Service;
 
 use HtSettingsModule\Mapper\SettignsMapperInterface;
+use HtSettingsModule\Options\ModuleOptionsInterface;
 
-class SettignsProvider implements SettingsProviderInterface
+class SettingsProvider implements SettingsProviderInterface
 {
     /**
      * @var CacheManagerInterface
@@ -37,11 +38,11 @@ class SettignsProvider implements SettingsProviderInterface
     public function getSettings($namespace)
     {
         if ($this->getCacheOptions()->isEnabled()) {
-            if ($this->cacheManager->cacheExists($namespace)) {
-                return $this->cacheManager->getCache($namespace);
+            if ($this->cacheManager->settingsExists($namespace)) {
+                return $this->cacheManager->get($namespace);
             }
             $settings = $this->getSettingsFromRealSource($namespace);
-            $this->cacheManager->createCache($namespace, $settings);
+            $this->cacheManager->create($namespace, $settings);
 
             return $settings;
         }
@@ -68,7 +69,6 @@ class SettignsProvider implements SettingsProviderInterface
             $hydrator = $namespaceOptions->getHydrator();
             $entity = $hydrator->hydrate($arrayData, $entity);
         }
-
         return $entity;
     }
 
@@ -93,5 +93,15 @@ class SettignsProvider implements SettingsProviderInterface
         $this->cacheManager = $cacheManager;
 
         return $this;
+    }
+
+    /**
+     * Gets cacheManager
+     *
+     * @return  CacheManagerInterface
+     */
+    public function getCacheManager()
+    {
+        return $this->cacheManager;
     }
 }

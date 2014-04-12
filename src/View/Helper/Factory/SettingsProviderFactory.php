@@ -13,6 +13,6 @@ class SettingsProviderFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $helpers)
     {
-        return new SettingsProvider($helpers->getServiceLocator()->get('HtSettingsModule\Service\SettignsProvider'));
+        return new SettingsProvider($helpers->getServiceLocator()->get('HtSettingsModule\Service\SettingsProvider'));
     }    
 }

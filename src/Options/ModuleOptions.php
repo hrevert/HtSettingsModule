@@ -73,10 +73,43 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     {
         $this->namespaces = [];
         foreach ($namespaces as $namespace => $namespaceOptions) {
-            $namespaceOptions = new NamespaceOptions($namespaceOptions);
-            $namespaceOptions->setName($namespace);
-            $this->namespaces[$namespace] = $namespaceOptions;
+            $this->addNamespace($namespaceOptions, $namespace);
         }
+    }
+
+    /**
+     * Adds new namespace
+     *
+     * @param array|NamespaceOptionsInterface $namespaceOptions
+     * @param string|null $namespace
+     * @return void
+     */
+    public function addNamespace($namespaceOptions, $namespace = null)
+    {
+        if (!$namespaceOptions instanceof NamespaceOptionsInterface) {
+            if (is_array($namespaceOptions)) {
+                $namespaceOptions = new NamespaceOptions($namespaceOptions);
+                if ($namespace !== null) {
+                    $namespaceOptions->setName($namespace);
+                }
+            } else {
+                 throw new Exception\InvalidArgumentException(
+                    sprintf(
+                        '%s expects parameter 1 to be array or an instance of HtSettingsModule\Options\NamespaceOptionsInterface, %s provided instead',
+                        __METHOD__,
+                        is_object($namespaceOptions) ? get_class($namespaceOptions) : gettype($namespaceOptions)
+                    )
+                );               
+            }            
+        } else {
+            if (!$namespaceOptions->getName() && $namespace) {
+                $namespaceOptions->setName($namespace);
+            }
+        }
+        if ($namespace === null) {
+            $namespace = $namespaceOptions->getName();
+        }
+        $this->namespaces[$namespace] = $namespaceOptions;
     }
 
     /**

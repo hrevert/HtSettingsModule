@@ -3,6 +3,7 @@ namespace HtSettingsModuleTest\Options;
 
 use HtSettingsModule\Options\ModuleOptions; 
 use HtSettingsModule\Options\CacheOptions; 
+use HtSettingsModule\Options\NamespaceOptions; 
 
 class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -62,5 +63,19 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(true, $options->getCacheOptions()->isEnabled());
         $this->setExpectedException('HtSettingsModule\Exception\InvalidArgumentException');
         $options->setCacheOptions(new \ArrayObject);
+    }
+
+    public function testAddNamespace()
+    {
+        $options = new ModuleOptions;
+        $options->addNamespace([
+            'name' => 'laptop',
+            'entity_class' => 'HtSettingsModule\Entity\Parameter',
+        ]);
+        $options->addNamespace([], 'smart_phone');
+        $options->addNamespace(new NamespaceOptions, 'smart_tv');
+        $this->assertEquals('laptop', $options->getNamespaceOptions('laptop')->getName());
+        $this->assertEquals('smart_phone', $options->getNamespaceOptions('smart_phone')->getName());
+        $this->assertEquals('smart_tv', $options->getNamespaceOptions('smart_tv')->getName());
     }
 }

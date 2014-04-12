@@ -3,9 +3,9 @@ namespace HtSettingsModule\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use HtSettingsModule\Service\SettignsProvider;
+use HtSettingsModule\Service\SettingsProvider;
 
-class SettignsProviderFactory implements FactoryInterface
+class SettingsProviderFactory implements FactoryInterface
 {
     /**
      * Gets settings mapper
@@ -16,7 +16,7 @@ class SettignsProviderFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $options = $serviceLocator->get('HtSettingsModule\Options\ModuleOptions');
-        $settingsProvider = new SettignsProvider(
+        $settingsProvider = new SettingsProvider(
             $options,
             $serviceLocator->get('HtSettingsModule_SettingsMappers')
         );

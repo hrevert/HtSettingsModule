@@ -49,7 +49,7 @@ class Module implements
                 'HtSettingsModule\Options\ModuleOptions' => 'HtSettingsModule\Factory\ModuleOptionsFactory',
                 'HtSettingsModule_SettingsMappers' => 'HtSettingsModule\Factory\SettignsMapperFactory',
                 'HtSettingsModule\Service\CacheManager'=> 'HtSettingsModule\Factory\CacheManagerFactory',
-                'HtSettingsModule\Service\SettignsProvider'=> 'HtSettingsModule\Factory\SettignsProviderFactory',
+                'HtSettingsModule\Service\SettingsProvider'=> 'HtSettingsModule\Factory\SettingsProviderFactory',
             ],
             'aliases' => [
                 'HtSettingsModule\DbAdapter' => 'Zend\Db\Adapter\Adapter',

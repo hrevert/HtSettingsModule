@@ -6,7 +6,7 @@ use HtSettingsModule\Exception;
 use Zend\Stdlib\Hydrator;
 use ArrayObject;
 
-class NamespaceOptions extends AbstractOptions
+class NamespaceOptions extends AbstractOptions implements NamespaceOptionsInterface
 {
     /**
      * @var string

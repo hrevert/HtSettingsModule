@@ -32,6 +32,26 @@ class Parameter implements ParameterInterface
     protected $value;
 
     /**
+     * Constructor
+     *
+     * @param string|null $namespace
+     * @param string|null $name
+     * @param string|null $value
+     */
+    public function __construct($namespace = null, $name = null, $value = null)
+    {
+        if ($namespace !== null) {
+            $this->setNamespace($namespace);
+        }
+        if ($name !== null) {
+            $this->setName($name);
+        }
+        if ($value !== null) {
+            $this->setValue($value);
+        }
+    }
+
+    /**
      * Sets Parameter id
      *
      * @param int $id
