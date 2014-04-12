@@ -39,12 +39,11 @@ class SettignsProvider implements SettingsProviderInterface
         if ($this->getCacheOptions()->isEnabled()) {
             if ($this->cacheManager->cacheExists($namespace)) {
                 return $this->cacheManager->getCache($namespace);
-            } else {
-                $settings = $this->getSettingsFromRealSource($namespace);
-                $this->cacheManager->createCache($namespace, $settings);
-
-                return $settings;
             }
+            $settings = $this->getSettingsFromRealSource($namespace);
+            $this->cacheManager->createCache($namespace, $settings);
+
+            return $settings;
         }
 
         return $this->getSettingsFromRealSource($namespace);
