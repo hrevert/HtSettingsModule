@@ -6,7 +6,7 @@ class Parameter implements ParameterInterface
     /**
      * Parameter id.
      *
-     * @var mixed
+     * @var int
      */
     protected $id;
 
@@ -32,7 +32,22 @@ class Parameter implements ParameterInterface
     protected $value;
 
     /**
-     * {@inheritdoc}
+     * Sets Parameter id
+     *
+     * @param int $id
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets Parameter id
+     *
+     * @return int
      */
     public function getId()
     {

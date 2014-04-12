@@ -2,7 +2,7 @@
 namespace HtSettingsModule\Options;
 
 use Zend\Stdlib\AbstractOptions;
-use HtSettingsModule\Exception
+use HtSettingsModule\Exception;
 use Zend\Stdlib\Hydrator;
 use ArrayObject;
 
@@ -71,7 +71,7 @@ class NamespaceOptions extends AbstractOptions
             $this->entityPrototype = new ArrayObject;
         }
         if (!is_object($this->entityPrototype)) {
-            throw new Exception\RuntimeException('Entity prototype not set!');
+            throw new Exception\RuntimeException('Entity prototype is set!');
         }
 
         return $this->entityPrototype;
@@ -124,6 +124,7 @@ class NamespaceOptions extends AbstractOptions
             } else {
                 $hydrator = new Hydrator\ClassMethods;
             }
+            $this->hydrator = $hydrator;
         }
 
         return $this->hydrator;

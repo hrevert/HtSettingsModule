@@ -109,15 +109,16 @@ class CacheManager implements CacheManagerInterface
             return false;
         }
 
+        $namespaces = $this->cacheOptions->getNamespaces();
         // user has enabled caching but has not specified namespaces to cache,
         // so we cache all the namespaces
-        if (empty($this->cacheOptions->getNamespaces())) {
+        if (empty($namespaces)) {
             return true;
         }
 
         // user has enabled caching but has specified certain namespaces to cache,
         // so we cache only the specified namespaces
-        return in_array($namespace, $this->cacheOptions->getNamespaces());
+        return in_array($namespace, $namespaces);
     }
 
     /**

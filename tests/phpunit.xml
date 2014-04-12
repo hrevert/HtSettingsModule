@@ -1,0 +1,5 @@
+﻿<phpunit bootstrap="Bootstrap.php">
+    <testsuite name="HtSettingsModuleTest">
+        <directory>HtSettingsModuleTest</directory>
+    </testsuite>
+</phpunit>

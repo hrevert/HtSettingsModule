@@ -69,7 +69,8 @@ $options = [
          *
          *      'adapter' => [
          *          'namespace1' => 'adapter1',
-         *          'namespace2' => 'adapter3',
+         *          'namespace2' => 'adapter2',
+         *          // .........
          *      ]
          */
         'adapter' => 'Zend\Cache\Storage\Adapter\Memory',
