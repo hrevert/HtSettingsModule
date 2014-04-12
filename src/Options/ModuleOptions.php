@@ -19,12 +19,12 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * @var string|\Zend\Db\Sql\TableIdentifier
      */
-    protected $settingsTable;
+    protected $settingsTable = 'settings';
 
     /**
      * @var string
      */
-    protected $parameterEntityClass;
+    protected $parameterEntityClass = 'HtSettingsModule\Entity\Parameter';
 
     /**
      * Sets options of cache
