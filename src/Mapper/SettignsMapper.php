@@ -6,7 +6,7 @@ use ZfcBase\Mapper\AbstractDbMapper;
 class SettignsMapper extends AbstractDbMapper
 {
     /**
-     * {@inheritDoc} 
+     * {@inheritDoc}
      */
     public function findByNamespace($namespace)
     {
@@ -19,7 +19,7 @@ class SettignsMapper extends AbstractDbMapper
     /**
      * Sets table name of settings
      *
-     * @param string|\Zend\Db\Sql\TableIdentifier $tableName
+     * @param  string|\Zend\Db\Sql\TableIdentifier $tableName
      * @return self
      */
     public function setTableName($tableName)

@@ -10,7 +10,7 @@ class CacheManagerFactory implements FactoryInterface
     /**
      * Gets cache manager
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return CacheManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -19,5 +19,5 @@ class CacheManagerFactory implements FactoryInterface
         $cacheManager->setServiceLocator($serviceLocator);
 
         return $cacheManager;
-    }    
+    }
 }

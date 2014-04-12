@@ -29,7 +29,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets options of cache
      *
-     * @param array|CacheOptionsInterface $cacheOptions
+     * @param  array|CacheOptionsInterface $cacheOptions
      * @return self
      */
     public function setCacheOptions($cacheOptions)
@@ -37,7 +37,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
         if ($cacheOptions instanceof CacheOptionsInterface) {
             $this->cacheOptions = $cacheOptions;
         } elseif (is_array($cacheOptions)) {
-            $this->cacheOptions = new CacheOptions($cacheOptions);   
+            $this->cacheOptions = new CacheOptions($cacheOptions);
         } else {
             throw new Exception\InvalidArgumentException(
                 sprintf(
@@ -47,8 +47,8 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
                 )
             );
         }
-        
-        return $this;        
+
+        return $this;
     }
 
     /**
@@ -66,7 +66,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets namespaces
      *
-     * @param array $namespaces
+     * @param  array $namespaces
      * @return void
      */
     public function setNamespaces(array $namespaces)
@@ -95,7 +95,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
         if (!isset($this->namespaces[$namespace])) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Options Namespace, "%s" does not exist!', $namespace)
-            );            
+            );
         }
 
         return $this->namespaces[$namespace];
@@ -104,7 +104,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets table name of settings
      *
-     * @param string|\Zend\Db\Sql\TableIdentifier $settingsTable
+     * @param  string|\Zend\Db\Sql\TableIdentifier $settingsTable
      * @return self
      */
     public function setSettingsTable($settingsTable)
@@ -133,7 +133,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets parameter entity class
      *
-     * @param string $parameterEntityClass
+     * @param  string $parameterEntityClass
      * @return self
      */
     public function setParameterEntityClass($parameterEntityClass)

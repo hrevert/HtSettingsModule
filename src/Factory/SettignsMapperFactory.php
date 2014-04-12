@@ -10,7 +10,7 @@ class SettignsMapperFactory implements FactoryInterface
     /**
      * Gets settings mapper
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return SettignsMapper
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -22,6 +22,6 @@ class SettignsMapperFactory implements FactoryInterface
         $mapper->setEntityPrototype(new $entityClass);
         $mapper->setTableName($options->getSettingsTable());
 
-        return $mapper;        
-    }    
+        return $mapper;
+    }
 }

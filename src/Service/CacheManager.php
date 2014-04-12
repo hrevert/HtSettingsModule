@@ -26,7 +26,7 @@ class CacheManager implements CacheManagerInterface
     /**
      * Gets cache adapter of a settings namespace
      *
-     * @param string $namespace
+     * @param  string                               $namespace
      * @return \Zend\Cache\Storage\StorageInterface
      */
     public function getCacheAdapter($namespace)
@@ -34,7 +34,7 @@ class CacheManager implements CacheManagerInterface
         // caching is not enabled for a namespace
         if (!$this->isCacheable($namespace)) {
             return null;
-        } 
+        }
 
         // user wants to implements different adapter for different namespaces
         if (is_array($this->cacheOptions->getAdapter())) {
@@ -48,7 +48,6 @@ class CacheManager implements CacheManagerInterface
             $adapter = $this->cacheOptions->getAdapter();
         }
 
-        
         if (is_object($adapter)) {
             return $adapter;
         }
@@ -93,7 +92,7 @@ class CacheManager implements CacheManagerInterface
        if (!$this->isCacheable($namespace)) {
            return;
        }
-       
+
        $cacheAdapter = $this->getCacheAdapter($namespace);
        $cacheAdapter->addItem($namespace, $settings);
     }
@@ -101,7 +100,7 @@ class CacheManager implements CacheManagerInterface
     /**
      * Checks if settings of a namespace can be cached
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return bool
      */
     public function isCacheable($namespace)
@@ -113,7 +112,7 @@ class CacheManager implements CacheManagerInterface
         // user has enabled caching but has not specified namespaces to cache,
         // so we cache all the namespaces
         if (empty($this->cacheOptions->getNamespaces())) {
-            return true; 
+            return true;
         }
 
         // user has enabled caching but has specified certain namespaces to cache,
@@ -128,7 +127,7 @@ class CacheManager implements CacheManagerInterface
     {
         if ($this->settingsExists($namespace)) {
             $cacheAdapter = $this->getCacheAdapter($namespace);
-            $cacheAdapter->removeItem($namespace);             
-        }       
+            $cacheAdapter->removeItem($namespace);
+        }
     }
 }
