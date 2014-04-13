@@ -57,7 +57,7 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
             $settingsMapper
         );
         $namespaceOptions = new NamespaceOptions([
-            'entity_prototype' => new \ArrayObject,
+            'entity_class' => 'ArrayObject',
             'hydrator' => new Hydrator\ArraySerializable,
         ]);
         $options->addNamespace($namespaceOptions, 'theme');

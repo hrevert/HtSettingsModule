@@ -50,6 +50,7 @@ class Module implements
                 'HtSettingsModule_SettingsMappers' => 'HtSettingsModule\Factory\SettingsMapperFactory',
                 'HtSettingsModule\Service\CacheManager'=> 'HtSettingsModule\Factory\CacheManagerFactory',
                 'HtSettingsModule\Service\SettingsProvider'=> 'HtSettingsModule\Factory\SettingsProviderFactory',
+                'HtSettingsModule\Service\SettingsService'=> 'HtSettingsModule\Factory\SettingsServiceFactory',
             ],
             'aliases' => [
                 'HtSettingsModule\DbAdapter' => 'Zend\Db\Adapter\Adapter',

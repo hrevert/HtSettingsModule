@@ -18,7 +18,7 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
                     'hydrator' => 'Zend\Stdlib\Hydrator\ClassMethods',
                 ],
                 'football' => [
-                    'entity_prototype' => new \ArrayObject,
+                    'entity_class' => 'ArrayObject',
                     'hydrator' => 'Zend\Stdlib\Hydrator\ArraySerializable',
                 ],
             ],

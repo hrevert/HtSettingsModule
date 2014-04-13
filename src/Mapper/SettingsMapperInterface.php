@@ -33,4 +33,11 @@ interface SettingsMapperInterface
      * @param  ParameterInterface             $parameter
      */
     public function deleteParameter(ParameterInterface $parameter);
+
+    /**
+     * Finds a parameter
+     *
+     * @param  ParameterInterface|string             $parameter
+     */
+    public function findParameter($parameter, $name = null);
 }

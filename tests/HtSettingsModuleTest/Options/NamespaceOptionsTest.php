@@ -5,13 +5,6 @@ use HtSettingsModule\Options\NamespaceOptions;
 
 class NamespaceOptionsTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetExceptionWithInvalidEntityPrototype()
-    {
-        $options = new NamespaceOptions;
-        $this->setExpectedException('HtSettingsModule\Exception\InvalidArgumentException');
-        $options->setEntityPrototype('this is not object');
-    }
-
     public function testGetDefaultEntityPrototype()
     {
         $options = new NamespaceOptions;
@@ -23,7 +16,7 @@ class NamespaceOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new NamespaceOptions;
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ArraySerializable', $options->getHydrator());
         $options = new NamespaceOptions;
-        $options->setEntityPrototype(new \stdClass);
+        $options->setEntityClass('stdClass');
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ClassMethods', $options->getHydrator());
     }
 }

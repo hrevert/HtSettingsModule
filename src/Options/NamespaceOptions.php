@@ -14,6 +14,11 @@ class NamespaceOptions extends AbstractOptions implements NamespaceOptionsInterf
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $entityClass;
+
+    /**
      * @var object
      */
     protected $entityPrototype;
@@ -45,19 +50,14 @@ class NamespaceOptions extends AbstractOptions implements NamespaceOptionsInterf
     }
 
     /**
-     * Sets entity prototype of namespace entity
+     * Sets entity class of namespace entity
      *
-     * @param  object $entityPrototype
+     * @param  string $entityClass
      * @return self
      */
-    public function setEntityPrototype($entityPrototype)
+    public function setEntityClass($entityClass)
     {
-        if (!is_object($entityPrototype)) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('%s expects parameter 1 to be object, %s provided instead', __METHOD__, gettype($entityPrototype))
-            );
-        }
-        $this->entityPrototype = $entityPrototype;
+        $this->entityClass = $entityClass;
 
         return $this;
     }
@@ -68,24 +68,25 @@ class NamespaceOptions extends AbstractOptions implements NamespaceOptionsInterf
     public function getEntityPrototype()
     {
         if (!$this->entityPrototype) {
-            $this->entityPrototype = new ArrayObject;
-        }
-        if (!is_object($this->entityPrototype)) {
-            throw new Exception\RuntimeException('Entity prototype is set!');
+            if ($this->getEntityClass()) {
+                $entityClass = $this->getEntityClass();
+                $this->entityPrototype = new $entityClass;
+            } else {
+                $this->entityPrototype = new ArrayObject;
+            }
         }
 
         return $this->entityPrototype;
     }
 
     /**
-     * Sets entity prototype of namespace entity from entity class
+     * Gets entity class of namespace
      *
-     * @param  string $entityClass
-     * @return self
+     * @return  string
      */
-    public function setEntityClass($entityClass)
+    public function getEntityClass()
     {
-        return $this->setEntityPrototype(new $entityClass);
+        return $this->entityClass;
     }
 
     /**
