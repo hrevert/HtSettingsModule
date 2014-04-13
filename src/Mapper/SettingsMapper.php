@@ -23,7 +23,7 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
      */
     public function insertParameter(ParameterInterface $parameter)
     {
-        $result = parent::insert($parameter);
+        $result = $this->insert($parameter);
         $parameter->setId($result->getGeneratedValue());        
     }
 
@@ -32,7 +32,8 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
      */
     public function updateParameter(ParameterInterface $parameter)
     {
-         parent::update($entity, ['id' => $parameter->getId()]);
+        $where = $this->getWhereFromParameter($parameter);
+        $this->update($entity, $where);
     }
 
     /**
@@ -40,7 +41,8 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
      */
     public function deleteParameter(ParameterInterface $parameter)
     {
-        parent::delete(['id' => $parameter->getId()]);
+        $where = $this->getWhereFromParameter($parameter);
+        $this->delete($where);
     }
 
     /**
@@ -49,7 +51,7 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
     public function findParameter($parameter, $name = null)
     {
         if ($parameter instanceof ParameterInterface) {
-            $where = ['namespace' => $parameter->getNamespace(), 'name' => $parameter->getName()];
+            $where = $this->getWhereFromParameter($parameter);
         } elseif (is_string($parameter)) {
             $namespace = $parameter;
             $where = ['namespace' => $namespace, 'name' => $name];
@@ -66,6 +68,21 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
         $select->where($where);
 
         return $this->select($select);
+    }
+
+    /**
+     * Gets where condition of select, update or delete a parameter
+     *
+     * @param ParameterInterface $parameter
+     * @return array
+     */
+    protected function getWhereFromParameter(ParameterInterface $parameter)
+    {
+        if ($parameter->getId()) {
+            return ['id' => $parameter->getId()];
+        } else {
+            return ['namespace' => $parameter->getNamespace(), 'name' => $parameter->getName()];
+        }        
     }
 
     /**
