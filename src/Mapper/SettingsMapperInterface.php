@@ -1,6 +1,8 @@
 <?php
 namespace HtSettingsModule\Mapper;
 
+use HtSettingsModule\Entity\ParameterInterface;
+
 interface SettingsMapperInterface
 {
     /**
@@ -11,5 +13,24 @@ interface SettingsMapperInterface
      */
     public function findByNamespace($namespace);
 
-    public function insertParameter($parameter);
+    /**
+     * Insert new settings data
+     *
+     * @param  ParameterInterface             $parameter
+     */
+    public function insertParameter(ParameterInterface $parameter);
+
+    /**
+     * Updates one or more row
+     *
+     * @param  ParameterInterface             $parameter
+     */
+    public function updateParameter(ParameterInterface $parameter);
+
+    /**
+     * Removes a settings data
+     *
+     * @param  ParameterInterface             $parameter
+     */
+    public function deleteParameter(ParameterInterface $parameter);
 }
