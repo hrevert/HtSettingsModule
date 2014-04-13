@@ -4,11 +4,15 @@ namespace HtSettingsModule;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ModuleManager\Feature\ControllerPluginProviderInterface;
+use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 
-class Module implements 
+class Module implements
     AutoloaderProviderInterface,
     ConfigProviderInterface,
-    ServiceProviderInterface
+    ServiceProviderInterface,
+    ControllerPluginProviderInterface,
+    ViewHelperProviderInterface
 {
     /**
      * {@inheritDoc}
@@ -44,10 +48,42 @@ class Module implements
             'factories' => [
                 'HtSettingsModule\Options\ModuleOptions' => 'HtSettingsModule\Factory\ModuleOptionsFactory',
                 'HtSettingsModule_SettingsMappers' => 'HtSettingsModule\Factory\SettignsMapperFactory',
+                'HtSettingsModule\Service\CacheManager'=> 'HtSettingsModule\Factory\CacheManagerFactory',
+                'HtSettingsModule\Service\SettingsProvider'=> 'HtSettingsModule\Factory\SettingsProviderFactory',
             ],
             'aliases' => [
                 'HtSettingsModule\DbAdapter' => 'Zend\Db\Adapter\Adapter',
             ]
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getControllerPluginConfig()
+    {
+        return [
+            'factories' => [
+                'HtSettingsModule\Controller\Plugin\SettingsProvider' => 'HtSettingsModule\Controller\Plugin\Factory\SettingsProviderFactory',
+            ],
+            'aliases' => [
+                'getSettings' => 'HtSettingsModule\Controller\Plugin\SettingsProvider',
+             ]
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getViewHelperConfig()
+    {
+        return [
+            'factories' => [
+                'HtSettingsModule\View\Helper\SettingsProvider' => 'HtSettingsModule\View\Helper\Factory\SettingsProviderFactory',
+            ],
+            'aliases' => [
+                'getSettings' => 'HtSettingsModule\View\Helper\SettingsProvider',
+             ]
         ];
     }
 }

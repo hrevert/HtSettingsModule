@@ -24,7 +24,7 @@ class CacheOptions extends AbstractOptions implements CacheOptionsInterface
     /**
      * Enables or disables cache feature
      *
-     * @param bool $flag
+     * @param  bool $flag
      * @return self
      */
     public function setEnabled($flag = true)
@@ -45,7 +45,7 @@ class CacheOptions extends AbstractOptions implements CacheOptionsInterface
     /**
      * Sets cache adapter for caching
      *
-     * @param string|\Zend\Cache\Storage\Adapter\StorageInterface $adapter
+     * @param  string|\Zend\Cache\Storage\Adapter\StorageInterface $adapter
      * @return self
      */
     public function setAdapter($adapter)

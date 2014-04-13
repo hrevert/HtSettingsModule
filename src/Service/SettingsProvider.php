@@ -1,9 +1,10 @@
 <?php
 namespace HtSettingsModule\Service;
 
-use HtSettingsModule\Options\ModuleOptions;
+use HtSettingsModule\Mapper\SettignsMapperInterface;
+use HtSettingsModule\Options\ModuleOptionsInterface;
 
-class SettignsProvider implements SettingsProviderInterface
+class SettingsProvider implements SettingsProviderInterface
 {
     /**
      * @var CacheManagerInterface
@@ -11,7 +12,7 @@ class SettignsProvider implements SettingsProviderInterface
     protected $cacheManager;
 
     /**
-     * @var \HtSettingsModule\Mapper\SettignsMapperInterface
+     * @var SettignsMapperInterface
      */
     protected $settingsMapper;
 
@@ -23,26 +24,27 @@ class SettignsProvider implements SettingsProviderInterface
     /**
      * Constructor
      *
-     * @param ModuleOptionsInterface $options 
+     * @param ModuleOptionsInterface $options
      */
-    public function __construct(ModuleOptionsInterface $options)
+    public function __construct(ModuleOptionsInterface $options, SettignsMapperInterface $settingsMapper)
     {
         $this->options = $options;
+        $this->settingsMapper = $settingsMapper;
     }
 
     /**
-     * {@inheritDoc} 
+     * {@inheritDoc}
      */
     public function getSettings($namespace)
     {
         if ($this->getCacheOptions()->isEnabled()) {
-            if ($cacheManager->cacheExists($namespace)) {
-                return $cacheManager->getCache($namespace);
-            } else {
-                $settings = $this->getSettingsFromRealSource($namespace);
-                $cacheManager->createCache($namespace, $settings);
-                return $settings;                
+            if ($this->cacheManager->settingsExists($namespace)) {
+                return $this->cacheManager->get($namespace);
             }
+            $settings = $this->getSettingsFromRealSource($namespace);
+            $this->cacheManager->create($namespace, $settings);
+
+            return $settings;
         }
 
         return $this->getSettingsFromRealSource($namespace);
@@ -51,12 +53,12 @@ class SettignsProvider implements SettingsProviderInterface
     /**
      * Gets settings from real source, most probably from database
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return object
      */
     protected function getSettingsFromRealSource($namespace)
     {
-        $resultSet = $this->getSettingsMapper()->findByNamespace($namespace);
+        $resultSet = $this->settingsMapper->findByNamespace($namespace);
         $namespaceOptions = $this->options->getNamespaceOptions($namespace);
         $entity = clone($namespaceOptions->getEntityPrototype());
         $arrayData = [];
@@ -65,9 +67,8 @@ class SettignsProvider implements SettingsProviderInterface
         }
         if (!empty($arrayData)) {
             $hydrator = $namespaceOptions->getHydrator();
-            $entiy = $hydrator->hydrate($arrayData, $entity);
+            $entity = $hydrator->hydrate($arrayData, $entity);
         }
-
         return $entity;
     }
 
@@ -82,16 +83,25 @@ class SettignsProvider implements SettingsProviderInterface
     }
 
     /**
-     * Gets settingsMapper
+     * Sets cacheManager
      *
-     * @return \HtSettingsModule\Mapper\SettignsMapperInterface
+     * @param  CacheManagerInterface $cacheManager
+     * @return self
      */
-    public function getSettingsMapper()
+    public function setCacheManager(CacheManagerInterface $cacheManager)
     {
-        if (!$this->settingsMapper) {
-            $this->settingsMapper = $this->getServiceLocator()->get('HtSettingsModule_SettingsMapper');
-        }
+        $this->cacheManager = $cacheManager;
 
-        return $this->settingsMapper;
+        return $this;
+    }
+
+    /**
+     * Gets cacheManager
+     *
+     * @return  CacheManagerInterface
+     */
+    public function getCacheManager()
+    {
+        return $this->cacheManager;
     }
 }

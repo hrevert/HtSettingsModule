@@ -2,11 +2,11 @@
 namespace HtSettingsModule\Options;
 
 use Zend\Stdlib\AbstractOptions;
-use HtSettingsModule\Exception
+use HtSettingsModule\Exception;
 use Zend\Stdlib\Hydrator;
 use ArrayObject;
 
-class NamespaceOptions extends AbstractOptions
+class NamespaceOptions extends AbstractOptions implements NamespaceOptionsInterface
 {
     /**
      * @var string
@@ -26,7 +26,7 @@ class NamespaceOptions extends AbstractOptions
     /**
      * Sets name of namespace
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -47,7 +47,7 @@ class NamespaceOptions extends AbstractOptions
     /**
      * Sets entity prototype of namespace entity
      *
-     * @param object $entityPrototype
+     * @param  object $entityPrototype
      * @return self
      */
     public function setEntityPrototype($entityPrototype)
@@ -71,7 +71,7 @@ class NamespaceOptions extends AbstractOptions
             $this->entityPrototype = new ArrayObject;
         }
         if (!is_object($this->entityPrototype)) {
-            throw new Exception\RuntimeException('Entity prototype not set!');            
+            throw new Exception\RuntimeException('Entity prototype is set!');
         }
 
         return $this->entityPrototype;
@@ -80,7 +80,7 @@ class NamespaceOptions extends AbstractOptions
     /**
      * Sets entity prototype of namespace entity from entity class
      *
-     * @param string $entityClass
+     * @param  string $entityClass
      * @return self
      */
     public function setEntityClass($entityClass)
@@ -91,7 +91,7 @@ class NamespaceOptions extends AbstractOptions
     /**
      * Sets hydrator of namespace entity for converting array to namespace entity
      *
-     * @param \Zend\Stdlib\Hydrator\HydratorInterface|string $hydrator
+     * @param  \Zend\Stdlib\Hydrator\HydratorInterface|string $hydrator
      * @return self
      */
     public function setHydrator($hydrator)
@@ -103,10 +103,10 @@ class NamespaceOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     '%s expects parameter 1 to be an object of instance Zend\Stdlib\Hydrator\HydratorInterface or string, %s provided instead',
-                    __METHOD__, 
+                    __METHOD__,
                     is_object($hydrator) ? get_class($hydrator) : gettype($hydrator)
                 )
-            ); 
+            );
         }
         $this->hydrator = $hydrator;
 
@@ -123,7 +123,8 @@ class NamespaceOptions extends AbstractOptions
                 $hydrator = new Hydrator\ArraySerializable;
             } else {
                 $hydrator = new Hydrator\ClassMethods;
-            }            
+            }
+            $this->hydrator = $hydrator;
         }
 
         return $this->hydrator;

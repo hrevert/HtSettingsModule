@@ -19,17 +19,17 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * @var string|\Zend\Db\Sql\TableIdentifier
      */
-    protected $settingsTable;
+    protected $settingsTable = 'settings';
 
     /**
      * @var string
      */
-    protected $parameterEntityClass;
+    protected $parameterEntityClass = 'HtSettingsModule\Entity\Parameter';
 
     /**
      * Sets options of cache
      *
-     * @param array|CacheOptionsInterface $cacheOptions
+     * @param  array|CacheOptionsInterface $cacheOptions
      * @return self
      */
     public function setCacheOptions($cacheOptions)
@@ -37,7 +37,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
         if ($cacheOptions instanceof CacheOptionsInterface) {
             $this->cacheOptions = $cacheOptions;
         } elseif (is_array($cacheOptions)) {
-            $this->cacheOptions = new CacheOptions($cacheOptions);   
+            $this->cacheOptions = new CacheOptions($cacheOptions);
         } else {
             throw new Exception\InvalidArgumentException(
                 sprintf(
@@ -47,8 +47,8 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
                 )
             );
         }
-        
-        return $this;        
+
+        return $this;
     }
 
     /**
@@ -66,17 +66,50 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets namespaces
      *
-     * @param array $namespaces
+     * @param  array $namespaces
      * @return void
      */
     public function setNamespaces(array $namespaces)
     {
         $this->namespaces = [];
         foreach ($namespaces as $namespace => $namespaceOptions) {
-            $namespaceOptions = new NamespaceOptions($namespaceOptions);
-            $namespaceOptions->setName($namespace);
-            $this->namespaces[$namespace] = $namespaceOptions;
+            $this->addNamespace($namespaceOptions, $namespace);
         }
+    }
+
+    /**
+     * Adds new namespace
+     *
+     * @param array|NamespaceOptionsInterface $namespaceOptions
+     * @param string|null $namespace
+     * @return void
+     */
+    public function addNamespace($namespaceOptions, $namespace = null)
+    {
+        if (!$namespaceOptions instanceof NamespaceOptionsInterface) {
+            if (is_array($namespaceOptions)) {
+                $namespaceOptions = new NamespaceOptions($namespaceOptions);
+                if ($namespace !== null) {
+                    $namespaceOptions->setName($namespace);
+                }
+            } else {
+                 throw new Exception\InvalidArgumentException(
+                    sprintf(
+                        '%s expects parameter 1 to be array or an instance of HtSettingsModule\Options\NamespaceOptionsInterface, %s provided instead',
+                        __METHOD__,
+                        is_object($namespaceOptions) ? get_class($namespaceOptions) : gettype($namespaceOptions)
+                    )
+                );               
+            }            
+        } else {
+            if (!$namespaceOptions->getName() && $namespace) {
+                $namespaceOptions->setName($namespace);
+            }
+        }
+        if ($namespace === null) {
+            $namespace = $namespaceOptions->getName();
+        }
+        $this->namespaces[$namespace] = $namespaceOptions;
     }
 
     /**
@@ -95,7 +128,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
         if (!isset($this->namespaces[$namespace])) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Options Namespace, "%s" does not exist!', $namespace)
-            );            
+            );
         }
 
         return $this->namespaces[$namespace];
@@ -104,7 +137,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets table name of settings
      *
-     * @param string|\Zend\Db\Sql\TableIdentifier $settingsTable
+     * @param  string|\Zend\Db\Sql\TableIdentifier $settingsTable
      * @return self
      */
     public function setSettingsTable($settingsTable)
@@ -133,7 +166,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets parameter entity class
      *
-     * @param string $parameterEntityClass
+     * @param  string $parameterEntityClass
      * @return self
      */
     public function setParameterEntityClass($parameterEntityClass)

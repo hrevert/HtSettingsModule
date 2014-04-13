@@ -10,7 +10,7 @@ class ModuleOptionsFactory implements FactoryInterface
     /**
      * Gets options of the module
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return ModuleOptions
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

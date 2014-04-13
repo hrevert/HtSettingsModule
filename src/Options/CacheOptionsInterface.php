@@ -7,8 +7,8 @@ interface CacheOptionsInterface
      * Checks if cache is enabled
      *
      * @return bool
-     */    
-    public function isEnabled(); 
+     */
+    public function isEnabled();
 
     /**
      * Gets cache adapter of one or more namespaces
