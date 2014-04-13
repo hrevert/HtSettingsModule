@@ -66,23 +66,12 @@ This is pretty straight forward. Here, `theme` is a namespace. Namespaces allow 
 From ServiceLocatorAware classes:
 
 ```php
-
+<?php
 $settings = new Application\Model\Theme();
 $settings->setFontSize(25);
 $settings->setFontColor('red');
 $settingsService = $this->getServiceLocator()->get('HtSettingsModule\Service\SettingsService');
-$settingsService->save($settings); // done
-
-// or you can do
-
-use HtSettingsModule\Entity\Parameter;
-
-$fontSizeParameter = new Parameter('theme', 'font_size', 25);
-$fontColorParameter = new Parameter('theme', 'font_color', 'red');
-$mapper = $this->getServiceLocator()->get('HtSettingsModule_SettingsMappers');
-$mapper->insertParameter($fontSizeParameter);
-$mapper->insertParameter($fontColorParameter);
-// ... save for other parameters, so better use the above method
+$settingsService->save($settings, 'theme'); // done
 ```
 
 ## Retrieving settings

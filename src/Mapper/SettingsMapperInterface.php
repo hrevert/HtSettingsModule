@@ -37,7 +37,9 @@ interface SettingsMapperInterface
     /**
      * Finds a parameter
      *
-     * @param  ParameterInterface|string             $parameter
+     * @param  ParameterInterface|string             $parameter     Parameter or namespace
+     * @param string|null $name
+     * @reutrn ParameterInterface|null
      */
     public function findParameter($parameter, $name = null);
 }
