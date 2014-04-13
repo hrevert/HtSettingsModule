@@ -52,10 +52,7 @@ class Parameter implements ParameterInterface
     }
 
     /**
-     * Sets Parameter id
-     *
-     * @param int $id
-     * @return self
+     * {@inheritdoc}
      */
     public function setId($id)
     {
@@ -65,9 +62,7 @@ class Parameter implements ParameterInterface
     }
 
     /**
-     * Gets Parameter id
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
