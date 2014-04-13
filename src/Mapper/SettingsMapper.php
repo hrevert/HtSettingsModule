@@ -3,7 +3,7 @@ namespace HtSettingsModule\Mapper;
 
 use ZfcBase\Mapper\AbstractDbMapper;
 
-class SettignsMapper extends AbstractDbMapper
+class SettingsMapper extends AbstractDbMapper
 {
     /**
      * {@inheritDoc}

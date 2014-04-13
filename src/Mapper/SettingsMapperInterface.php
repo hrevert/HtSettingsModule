@@ -1,7 +1,7 @@
 <?php
 namespace HtSettingsModule\Mapper;
 
-interface SettignsMapperInterface
+interface SettingsMapperInterface
 {
     /**
      * Gets rows of a namespace
@@ -10,4 +10,6 @@ interface SettignsMapperInterface
      * @return array|\Traversable
      */
     public function findByNamespace($namespace);
+
+    public function insertParameter($parameter);
 }
