@@ -1,7 +1,7 @@
 <?php
 namespace HtSettingsModule\Service;
 
-use HtSettingsModule\Mapper\SettignsMapperInterface;
+use HtSettingsModule\Mapper\SettingsMapperInterface;
 use HtSettingsModule\Options\ModuleOptionsInterface;
 
 class SettingsProvider implements SettingsProviderInterface
@@ -12,7 +12,7 @@ class SettingsProvider implements SettingsProviderInterface
     protected $cacheManager;
 
     /**
-     * @var SettignsMapperInterface
+     * @var SettingsMapperInterface
      */
     protected $settingsMapper;
 
@@ -26,7 +26,7 @@ class SettingsProvider implements SettingsProviderInterface
      *
      * @param ModuleOptionsInterface $options
      */
-    public function __construct(ModuleOptionsInterface $options, SettignsMapperInterface $settingsMapper)
+    public function __construct(ModuleOptionsInterface $options, SettingsMapperInterface $settingsMapper)
     {
         $this->options = $options;
         $this->settingsMapper = $settingsMapper;

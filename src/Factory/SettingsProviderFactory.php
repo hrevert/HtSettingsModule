@@ -11,7 +11,7 @@ class SettingsProviderFactory implements FactoryInterface
      * Gets settings mapper
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return SettignsMapper
+     * @return SettingsMapper
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

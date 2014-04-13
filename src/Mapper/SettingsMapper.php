@@ -4,7 +4,7 @@ namespace HtSettingsModule\Mapper;
 use ZfcBase\Mapper\AbstractDbMapper;
 use HtSettingsModule\Entity\ParameterInterface;
 
-class SettingsMapper extends AbstractDbMapper
+class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
 {
     /**
      * {@inheritDoc}
