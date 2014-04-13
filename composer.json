@@ -28,6 +28,9 @@
     "require-dev": {
         "zendframework/zend-cache": "~2.2"
     },
+    "suggest": {
+        "zendframework/zend-cache": "if you want to cache settings"
+    },
     "autoload": {
         "psr-4": {
             "HtSettingsModule\\": "src/"

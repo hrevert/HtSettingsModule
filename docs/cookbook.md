@@ -1,2 +1,0 @@
-HtSettingsModule Cookbook
-============================
