@@ -4,8 +4,9 @@ namespace HtSettingsModule\Service;
 use HtSettingsModule\Options\ModuleOptionsInterface;
 use HtSettingsModule\Mapper\SettingsMapperInterface;
 use HtSettingsModule\Exception;
+use ZfcBase\EventManager\EventProvider;
 
-class SettingsService implements SettingsServiceInterface
+class SettingsService extends EventProvider implements SettingsServiceInterface
 {
     /**
      * @var ModuleOptionsInterface
@@ -37,24 +38,78 @@ class SettingsService implements SettingsServiceInterface
         if ($namespace !== null) {
             $namespaceOptions = $this->options->getNamespaceOptions($namespace);
         } else {
+            $namespace = $namespaceOptions->getName();
             $namespaceOptions = $this->detectNamespace($settings);
         }
 
+        $namespaceParameters = $this->settingsMapper->findByNamespace($namespace);
         $arrayData = $namespaceOptions->getHydrator()->extract($settings);
+        $eventParams = ['settings' => $settings, 'array_data' => $arrayData, 'namespace' => $namespace];
+        $this->getEventManager()->trigger(__FUNCTION__, $this, $eventParams);
         foreach ($arrayData as $name => $value) {
-            $parameter = $this->settingsMapper->findParameter($namespaceOptions->getName(), $name);
-            if ($parameter) {
+            $parameter = $this->findParameter($namespace, $name, $namespaceParameters);
+            if ($parameter !== null) {
                 if ($parameter->getValue() != $value) {
                     $parameter->setValue($value);
+                    $this->getEventManager()->trigger('updateParameter', $this, ['parameter' => $parameter]);
                     $this->settingsMapper->updateParameter($parameter);                    
                 }
             } else {
                 $parameterEntityClass = $this->options->getParameterEntityClass();
-                $parameter = new $parameterEntityClass($namespaceOptions->getName(), $name, $value);
+                $parameter = new $parameterEntityClass;
+                $parameter->setNamespace($namespace);
+                $parameter->setName($name);
+                $parameter->setValue($value);
+                $this->getEventManager()->trigger('insertParameter', $this, ['parameter' => $parameter]);
                 $this->settingsMapper->insertParameter($parameter);
             }
             
         }
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function saveParameter($namespace, $name, $value)
+    {
+        $eventParams = ['namespace' => $namespace, 'name' => $name, 'value' => $value];
+        $this->getEventManager()->trigger(__FUNCTION__, $this, $eventParams);
+        $parameter = $this->settingsMapper->findParameter($namespace, $name);
+        if ($parameter) {
+            if ($parameter->getValue() != $value) {
+                $parameter->setValue($value);
+                $this->getEventManager()->trigger('updateParameter', $this, ['parameter' => $parameter]);
+                $this->settingsMapper->updateParameter($parameter);                    
+            }
+        } else {
+            $parameterEntityClass = $this->options->getParameterEntityClass();
+            $parameter = new $parameterEntityClass;
+            $parameter->setNamespace($namespace);
+            $parameter->setName($name);
+            $parameter->setValue($value);
+            $this->settingsMapper->insertParameter($parameter);            
+        }
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
+    }
+
+    /**
+     * Finds a namespace parameter from all the stored namespaces parameters
+     *
+     * @param string $namespace
+     * @param string $name
+     * @param array|\Traversable $namespaceParameters
+     * @return \HtSettingsModule\Entity\ParameterInterface|null
+     */
+    protected function findParameter($namespace, $name, $namespaceParameters)
+    {
+        foreach ($namespaceParameters as $namespaceParameter) {
+            if ($namespaceParameter->getNamespace() === $namespace && $namespaceParameter->getName() === $name) {
+                return $namespaceParameter;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -62,6 +117,7 @@ class SettingsService implements SettingsServiceInterface
      *
      * @param object $settings
      * @return \HtSettingsModule\Options\NamespaceOptionsInterface
+     * @throws Exception\InvalidArgumentException
      */
     protected function detectNamespace($settings)
     {
