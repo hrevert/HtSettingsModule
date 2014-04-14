@@ -1,9 +1,9 @@
 <?php
 namespace HtSettingsModuleTest\Options;
 
-use HtSettingsModule\Options\ModuleOptions; 
-use HtSettingsModule\Options\CacheOptions; 
-use HtSettingsModule\Options\NamespaceOptions; 
+use HtSettingsModule\Options\ModuleOptions;
+use HtSettingsModule\Options\CacheOptions;
+use HtSettingsModule\Options\NamespaceOptions;
 
 class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,7 +26,7 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
                 'enabled' => true,
                 'namespaces' => ['theme'],
                 'adapter' => 'Zend\Cache\Storage\Adapter\Memcached',
-            ]               
+            ]
         ]);
 
         $this->assertEquals('app_settings', $options->getSettingsTable());

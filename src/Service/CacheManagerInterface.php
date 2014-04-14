@@ -6,7 +6,7 @@ interface CacheManagerInterface
     /**
      * Checks if cache of settings of a namespace exists
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return bool
      */
     public function settingsExists($namespace);
@@ -14,7 +14,7 @@ interface CacheManagerInterface
     /**
      * Gets cache of settings of a namespace
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return object
      */
     public function get($namespace);
@@ -31,7 +31,7 @@ interface CacheManagerInterface
     /**
      * Deletes cache of settings of a namespace (if exists)
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return void
      */
     public function delete($namespace);

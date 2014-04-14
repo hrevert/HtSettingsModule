@@ -7,7 +7,7 @@ interface ParameterInterface
     /**
      * Sets Parameter id
      *
-     * @param int $id
+     * @param  int  $id
      * @return self
      */
     public function setId($id);

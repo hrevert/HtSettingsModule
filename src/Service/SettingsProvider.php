@@ -69,6 +69,7 @@ class SettingsProvider implements SettingsProviderInterface
             $hydrator = $namespaceOptions->getHydrator();
             $entity = $hydrator->hydrate($arrayData, $entity);
         }
+
         return $entity;
     }
 
@@ -98,7 +99,7 @@ class SettingsProvider implements SettingsProviderInterface
     /**
      * Gets cacheManager
      *
-     * @return  CacheManagerInterface
+     * @return CacheManagerInterface
      */
     public function getCacheManager()
     {

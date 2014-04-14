@@ -25,5 +25,5 @@ class SettingsProviderFactory implements FactoryInterface
         }
 
         return $settingsProvider;
-    }    
+    }
 }

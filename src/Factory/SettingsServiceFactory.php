@@ -19,5 +19,5 @@ class SettingsServiceFactory implements FactoryInterface
             $serviceLocator->get('HtSettingsModule\Options\ModuleOptions'),
             $serviceLocator->get('HtSettingsModule_SettingsMappers')
         );
-    }     
+    }
 }

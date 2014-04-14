@@ -29,20 +29,20 @@ $options = [
         /**
         'theme' => [ // here `theme` is the namespace
              *
-             * Entity Class for the namespace 
+             * Entity Class for the namespace
              *
              * Name of Entity class to use. Useful for using your own entity class
              * instead of the default one provided. Default is ArrayObject.
-             * 
-             *            
+             *
+             *
             //'entity_class' => 'Application\Model\Theme',
 
              *
-             * Hydrator class to convert settings array to entity 
+             * Hydrator class to convert settings array to entity
              *
              * Name of Hydrator class to use. Default is Zend\Stdlib\Hydrator\ArraySerializable
              * Must implement Zend\Stdlib\Hydrator\HydratorInterface
-             * 
+             *
             //'hydrator' => 'Zend\Stdlib\Hydrator\ClassMethods',
         ]
         */
@@ -59,7 +59,7 @@ $options = [
         'enabled' => true,
         /**
          * Cache adapter
-         * 
+         *
          * Accepted values:
          *  1. Array(for using different adapter for different namespaces)
          *  2. Service Name

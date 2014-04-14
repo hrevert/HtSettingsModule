@@ -18,5 +18,5 @@ class SettingsProviderFactoryTest extends \PHPUnit_Framework_TestCase
         $options->getCacheOptions()->setEnabled(true);
         $serviceManager->setService('HtSettingsModule\Service\CacheManager', $this->getMock('HtSettingsModule\Service\CacheManagerInterface'));
         $this->assertInstanceOf('HtSettingsModule\Service\SettingsProvider', $factory->createService($serviceManager));
-    }    
+    }
 }

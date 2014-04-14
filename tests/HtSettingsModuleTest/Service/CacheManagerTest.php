@@ -20,49 +20,49 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOneCacheAdapterFromOneAdapterObject()
     {
-        $options = new CacheOptions;  
-        $options->setEnabled(true);      
+        $options = new CacheOptions;
+        $options->setEnabled(true);
         $adapter = $this->getMock('Zend\Cache\Storage\StorageInterface');
         $options->setAdapter($adapter);
-        $cacheManger = new CacheManager($options);  
+        $cacheManger = new CacheManager($options);
         $cacheManger->setServiceLocator($this->getMock('Zend\ServiceManager\ServiceLocatorInterface'));
-        $this->assertEquals($adapter, $cacheManger->getCacheAdapter('stuff'));      
+        $this->assertEquals($adapter, $cacheManger->getCacheAdapter('stuff'));
     }
 
     public function testGetOneCacheAdapterFromOneClassName()
     {
-        $options = new CacheOptions;  
-        $options->setEnabled(true);      
+        $options = new CacheOptions;
+        $options->setEnabled(true);
         $options->setAdapter('Zend\Cache\Storage\Adapter\Memory');
-        $cacheManger = new CacheManager($options);  
+        $cacheManger = new CacheManager($options);
         $cacheManger->setServiceLocator($this->getMock('Zend\ServiceManager\ServiceLocatorInterface'));
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheManger->getCacheAdapter('stuff'));      
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheManger->getCacheAdapter('stuff'));
     }
 
     public function testGetCacheAdapterFromMultipleClassName()
     {
-        $options = new CacheOptions;  
-        $options->setEnabled(true);      
+        $options = new CacheOptions;
+        $options->setEnabled(true);
         $options->setAdapter([
             'stuff1' => 'Zend\Cache\Storage\Adapter\Memory',
             'stuff2' => 'Zend\Cache\Storage\Adapter\Filesystem',
         ]);
-        $cacheManger = new CacheManager($options);  
+        $cacheManger = new CacheManager($options);
         $cacheManger->setServiceLocator($this->getMock('Zend\ServiceManager\ServiceLocatorInterface'));
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheManger->getCacheAdapter('stuff1'));         
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Filesystem', $cacheManger->getCacheAdapter('stuff2'));  
-        $this->assertNull($cacheManger->getCacheAdapter('stuff3'));       
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheManger->getCacheAdapter('stuff1'));
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Filesystem', $cacheManger->getCacheAdapter('stuff2'));
+        $this->assertNull($cacheManger->getCacheAdapter('stuff3'));
     }
 
     public function testGetCacheAdapterFromServiceLocator()
     {
-        $options = new CacheOptions;  
-        $options->setEnabled(true);      
+        $options = new CacheOptions;
+        $options->setEnabled(true);
         $options->setAdapter([
             'stuff1' => 'Cache\MemoryAdapter',
             'stuff2' => 'Cache\FilesystemAdapter',
         ]);
-        $cacheManger = new CacheManager($options);  
+        $cacheManger = new CacheManager($options);
         $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
         $map = [
             ['Cache\MemoryAdapter', new \Zend\Cache\Storage\Adapter\Memory],
@@ -75,16 +75,16 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
             ->method('get')
             ->will($this->returnValueMap($map));
         $cacheManger->setServiceLocator($serviceLocator);
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheManger->getCacheAdapter('stuff1'));         
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Filesystem', $cacheManger->getCacheAdapter('stuff2'));  
-        $this->assertNull($cacheManger->getCacheAdapter('stuff3'));         
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheManger->getCacheAdapter('stuff1'));
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Filesystem', $cacheManger->getCacheAdapter('stuff2'));
+        $this->assertNull($cacheManger->getCacheAdapter('stuff3'));
     }
 
     public function testSettingsExists()
     {
-        $options = new CacheOptions;  
-        $options->setEnabled(true);  
-        $cacheManger = new CacheManager($options);  
+        $options = new CacheOptions;
+        $options->setEnabled(true);
+        $cacheManger = new CacheManager($options);
         $adapter = $this->getMock('Zend\Cache\Storage\StorageInterface');
         $options->setAdapter($adapter);
         $map = [
@@ -100,11 +100,11 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSettingsFromCache()
     {
-        $options = new CacheOptions;  
-        $options->setEnabled(true);  
-        $cacheManger = new CacheManager($options);  
+        $options = new CacheOptions;
+        $options->setEnabled(true);
+        $cacheManger = new CacheManager($options);
         $adapter = $this->getMock('Zend\Cache\Storage\StorageInterface');
-        $options->setAdapter($adapter); 
+        $options->setAdapter($adapter);
         $map1 = [
             ['stuff5', true],
             ['stuff6', false],
@@ -114,7 +114,7 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValueMap($map1));
         $adapter->expects($this->any())
             ->method('getItem')
-            ->will($this->returnValue('stuff5_data'));        
+            ->will($this->returnValue('stuff5_data'));
         $this->assertNull($cacheManger->get('stuff6'));
         $this->assertEquals('stuff5_data', $cacheManger->get('stuff5'));
     }
@@ -128,14 +128,14 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $options->setAdapter($adapter);
         $settings = new \ArrayObject;
         $cacheManger->create('stuff9', $settings);
-        $this->assertEquals($settings, $adapter->getItem('stuff9'));               
+        $this->assertEquals($settings, $adapter->getItem('stuff9'));
     }
 
     public function testDeleteCache()
     {
-        $options = new CacheOptions;  
-        $options->setEnabled(true);  
-        $cacheManger = new CacheManager($options);  
+        $options = new CacheOptions;
+        $options->setEnabled(true);
+        $cacheManger = new CacheManager($options);
         $adapter = new \Zend\Cache\Storage\Adapter\Memory;
         $options->setAdapter($adapter);
         $adapter->addItem('stuff13', new \ArrayObject);

@@ -32,14 +32,14 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
             $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface')
         );
         $cacheManager = $this->getMock('HtSettingsModule\Service\CacheManagerInterface');
-        $settingsProvider->setCacheManager($cacheManager);        
+        $settingsProvider->setCacheManager($cacheManager);
         $cacheManager->expects($this->any())
             ->method('settingsExists')
-            ->will($this->returnValue(true)); 
+            ->will($this->returnValue(true));
         $cacheManager->expects($this->any())
             ->method('get')
-            ->will($this->returnValue('something')); 
-        $this->assertEquals('something', $settingsProvider->getSettings('asdf'));                                
+            ->will($this->returnValue('something'));
+        $this->assertEquals('something', $settingsProvider->getSettings('asdf'));
     }
 
     public function testGetSettingsFromRealSourceAndCreateCache()
@@ -64,10 +64,10 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
         $settingsProvider->setCacheManager($cacheManager);
         $settingsMapper->expects($this->any())
             ->method('findByNamespace')
-            ->will($this->returnValue([new Parameter('theme', 'color', 'red'), new Parameter('theme', 'font_size', 33)])); 
+            ->will($this->returnValue([new Parameter('theme', 'color', 'red'), new Parameter('theme', 'font_size', 33)]));
         $settings = $settingsProvider->getSettings('theme');
-        $this->assertEquals('red', $settings['color']);    
+        $this->assertEquals('red', $settings['color']);
         $this->assertEquals(33, $settings['font_size']);
-        $this->assertEquals($settings, $adapter->getItem('theme'));                
+        $this->assertEquals($settings, $adapter->getItem('theme'));
     }
 }

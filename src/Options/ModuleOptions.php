@@ -80,8 +80,8 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Adds new namespace
      *
-     * @param array|NamespaceOptionsInterface $namespaceOptions
-     * @param string|null $namespace
+     * @param  array|NamespaceOptionsInterface $namespaceOptions
+     * @param  string|null                     $namespace
      * @return void
      */
     public function addNamespace($namespaceOptions, $namespace = null)
@@ -99,8 +99,8 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
                         __METHOD__,
                         is_object($namespaceOptions) ? get_class($namespaceOptions) : gettype($namespaceOptions)
                     )
-                );               
-            }            
+                );
+            }
         } else {
             if (!$namespaceOptions->getName() && $namespace) {
                 $namespaceOptions->setName($namespace);

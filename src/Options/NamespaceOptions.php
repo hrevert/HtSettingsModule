@@ -82,7 +82,7 @@ class NamespaceOptions extends AbstractOptions implements NamespaceOptionsInterf
     /**
      * Gets entity class of namespace
      *
-     * @return  string
+     * @return string
      */
     public function getEntityClass()
     {

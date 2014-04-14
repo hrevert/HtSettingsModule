@@ -1,7 +1,7 @@
 <?php
 namespace HtSettingsModuleTest\Options;
 
-use HtSettingsModule\Options\NamespaceOptions; 
+use HtSettingsModule\Options\NamespaceOptions;
 
 class NamespaceOptionsTest extends \PHPUnit_Framework_TestCase
 {

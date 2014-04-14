@@ -1,7 +1,6 @@
 <?php
 namespace HtSettingsModule\Factory;
 
-use HtSettingsModule\Factory\SettingsMapperFactory;
 use Zend\ServiceManager\ServiceManager;
 use HtSettingsModule\Options\ModuleOptions;
 

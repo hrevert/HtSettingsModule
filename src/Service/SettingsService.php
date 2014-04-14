@@ -21,7 +21,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
     /**
      * Constructor
      *
-     * @param ModuleOptionsInterface $options
+     * @param ModuleOptionsInterface  $options
      * @param SettingsMapperInterface $settingsMapper
      */
     public function __construct(ModuleOptionsInterface $options, SettingsMapperInterface $settingsMapper)
@@ -52,7 +52,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
                 if ($parameter->getValue() != $value) {
                     $parameter->setValue($value);
                     $this->getEventManager()->trigger('updateParameter', $this, ['parameter' => $parameter]);
-                    $this->settingsMapper->updateParameter($parameter);                    
+                    $this->settingsMapper->updateParameter($parameter);
                 }
             } else {
                 $parameterEntityClass = $this->options->getParameterEntityClass();
@@ -63,7 +63,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
                 $this->getEventManager()->trigger('insertParameter', $this, ['parameter' => $parameter]);
                 $this->settingsMapper->insertParameter($parameter);
             }
-            
+
         }
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
     }
@@ -80,7 +80,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
             if ($parameter->getValue() != $value) {
                 $parameter->setValue($value);
                 $this->getEventManager()->trigger('updateParameter', $this, ['parameter' => $parameter]);
-                $this->settingsMapper->updateParameter($parameter);                    
+                $this->settingsMapper->updateParameter($parameter);
             }
         } else {
             $parameterEntityClass = $this->options->getParameterEntityClass();
@@ -88,7 +88,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
             $parameter->setNamespace($namespace);
             $parameter->setName($name);
             $parameter->setValue($value);
-            $this->settingsMapper->insertParameter($parameter);            
+            $this->settingsMapper->insertParameter($parameter);
         }
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
     }
@@ -96,9 +96,9 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
     /**
      * Finds a namespace parameter from all the stored namespaces parameters
      *
-     * @param string $namespace
-     * @param string $name
-     * @param array|\Traversable $namespaceParameters
+     * @param  string                                           $namespace
+     * @param  string                                           $name
+     * @param  array|\Traversable                               $namespaceParameters
      * @return \HtSettingsModule\Entity\ParameterInterface|null
      */
     protected function findParameter($namespace, $name, $namespaceParameters)
@@ -115,7 +115,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
     /**
      * Tries to detect namespace from modal class
      *
-     * @param object $settings
+     * @param  object                                              $settings
      * @return \HtSettingsModule\Options\NamespaceOptionsInterface
      * @throws Exception\InvalidArgumentException
      */

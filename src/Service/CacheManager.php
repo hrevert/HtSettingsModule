@@ -26,8 +26,8 @@ class CacheManager implements CacheManagerInterface
     /**
      * Gets cache adapter of a settings namespace
      *
-     * @param  string                               $namespace
-     * @return \Zend\Cache\Storage\StorageInterface
+     * @param  string                                    $namespace
+     * @return \Zend\Cache\Storage\StorageInterface|null
      */
     public function getCacheAdapter($namespace)
     {

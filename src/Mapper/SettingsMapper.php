@@ -24,7 +24,7 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
     public function insertParameter(ParameterInterface $parameter)
     {
         $result = $this->insert($parameter);
-        $parameter->setId($result->getGeneratedValue());        
+        $parameter->setId($result->getGeneratedValue());
     }
 
     /**
@@ -73,7 +73,7 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
     /**
      * Gets where condition of select, update or delete a parameter
      *
-     * @param ParameterInterface $parameter
+     * @param  ParameterInterface $parameter
      * @return array
      */
     protected function getWhereFromParameter(ParameterInterface $parameter)
@@ -82,7 +82,7 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
             return ['id' => $parameter->getId()];
         } else {
             return ['namespace' => $parameter->getNamespace(), 'name' => $parameter->getName()];
-        }        
+        }
     }
 
     /**
