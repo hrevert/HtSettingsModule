@@ -88,6 +88,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
             $parameter->setNamespace($namespace);
             $parameter->setName($name);
             $parameter->setValue($value);
+            $this->getEventManager()->trigger('insertParameter', $this, ['parameter' => $parameter]);
             $this->settingsMapper->insertParameter($parameter);
         }
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
