@@ -83,9 +83,9 @@ echo $themeSettings->getFontColor();   // will print red
 ```
 From controller:
 ```php
-$themeSettings = $this->getSettings('theme');
+$themeSettings = $this->settings('theme');
 ```
 From view templates:
 ```php
-$themeSettings = $this->getSettings('theme');
+$themeSettings = $this->settings('theme');
 ```

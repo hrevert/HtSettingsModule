@@ -68,7 +68,7 @@ class Module implements
                 'HtSettingsModule\Controller\Plugin\SettingsProvider' => 'HtSettingsModule\Controller\Plugin\Factory\SettingsProviderFactory',
             ],
             'aliases' => [
-                'getSettings' => 'HtSettingsModule\Controller\Plugin\SettingsProvider',
+                'settings' => 'HtSettingsModule\Controller\Plugin\SettingsProvider',
              ]
         ];
     }
@@ -83,7 +83,7 @@ class Module implements
                 'HtSettingsModule\View\Helper\SettingsProvider' => 'HtSettingsModule\View\Helper\Factory\SettingsProviderFactory',
             ],
             'aliases' => [
-                'getSettings' => 'HtSettingsModule\View\Helper\SettingsProvider',
+                'settings' => 'HtSettingsModule\View\Helper\SettingsProvider',
              ]
         ];
     }
