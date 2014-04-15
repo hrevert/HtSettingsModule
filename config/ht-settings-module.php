@@ -23,7 +23,7 @@ $options = [
 
      /**
       * Namespaces are used to categorize group of settings
-      * For example, theme can be namespace which contains font-color, font-size etc.
+      * For example, `theme` can be a namespace which may contain font-color, font-size etc.
       */
     'namespaces' => [
         /**
@@ -56,7 +56,7 @@ $options = [
          * Default: false
          * Accepted values: boolean
          */
-        'enabled' => true,
+        //'enabled' => true,
         /**
          * Cache adapter
          *
@@ -73,7 +73,7 @@ $options = [
          *          // .........
          *      ]
          */
-        'adapter' => 'Zend\Cache\Storage\Adapter\Memory',
+        //'adapter' => 'Zend\Cache\Storage\Adapter\Memory',
 
         /**
          * Namespaces whose settings can be cached

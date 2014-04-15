@@ -48,7 +48,7 @@ interface ParameterInterface
     public function setName($name);
 
     /**
-     * Get value.
+     * Get parameter value.
      *
      * @return mixed
      */

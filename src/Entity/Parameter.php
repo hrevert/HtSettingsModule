@@ -36,7 +36,7 @@ class Parameter implements ParameterInterface
      *
      * @param string|null $namespace
      * @param string|null $name
-     * @param string|null $value
+     * @param mixed|null $value
      */
     public function __construct($namespace = null, $name = null, $value = null)
     {
