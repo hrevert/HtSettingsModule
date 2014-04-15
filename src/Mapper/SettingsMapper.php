@@ -33,7 +33,7 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
     public function updateParameter(ParameterInterface $parameter)
     {
         $where = $this->getWhereFromParameter($parameter);
-        $this->update($entity, $where);
+        $this->update($parameter, $where);
     }
 
     /**
