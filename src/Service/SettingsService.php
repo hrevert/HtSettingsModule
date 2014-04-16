@@ -127,7 +127,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
     protected function detectNamespace($settings)
     {
         foreach ($this->options->getNamespaces() as $namespaceOptions) {
-            $namespaceEntityClass = $namespace->getEntityClass();
+            $namespaceEntityClass = $namespaceOptions->getEntityClass();
             if ($settings instanceof $namespaceEntityClass) {
                 return $namespaceOptions;
             }
