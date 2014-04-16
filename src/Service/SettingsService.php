@@ -39,9 +39,9 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
     {
         if ($namespace !== null) {
             $namespaceOptions = $this->options->getNamespaceOptions($namespace);
-        } else {
-            $namespace = $namespaceOptions->getName();
+        } else {            
             $namespaceOptions = $this->detectNamespace($settings);
+            $namespace = $namespaceOptions->getName();
         }
 
         $namespaceParameters = $this->settingsMapper->findByNamespace($namespace);
