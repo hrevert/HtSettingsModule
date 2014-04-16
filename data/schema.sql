@@ -6,4 +6,4 @@ CREATE TABLE `settings` (
   `namespace` varchar(24) NOT NULL,
   `value` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8$$
+) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
