@@ -1,5 +1,10 @@
 HtSettingsModule
 ====================
+[![Master Branch Build Status](https://api.travis-ci.org/hrevert/HtSettingsModule.svg)](http://travis-ci.org/hrevert/HtSettingsModule)
+[![Latest Stable Version](https://poser.pugx.org/hrevert/ht-settings-module/v/stable.png)](https://packagist.org/packages/hrevert/ht-settings-module)
+[![Latest Unstable Version](https://poser.pugx.org/hrevert/ht-settings-module/v/unstable.png)](https://packagist.org/packages/hrevert/ht-settings-module)
+[![Total Downloads](https://poser.pugx.org/hrevert/ht-settings-module/downloads.png)](https://packagist.org/packages/hrevert/ht-settings-module)
+
 HtSettingsModule is a module for adding settings support to your Zend Framework 2 application.
 
 ## Installation
