@@ -7,11 +7,6 @@ use HtSettingsModule\Options\ModuleOptionsInterface;
 class SettingsProvider implements SettingsProviderInterface
 {
     /**
-     * @var CacheManagerInterface
-     */
-    protected $cacheManager;
-
-    /**
      * @var SettingsMapperInterface
      */
     protected $settingsMapper;
@@ -20,6 +15,8 @@ class SettingsProvider implements SettingsProviderInterface
      * @var ModuleOptionsInterface
      */
     protected $options;
+
+    use CacheManagerAwareTrait;
 
     /**
      * Constructor
@@ -81,28 +78,5 @@ class SettingsProvider implements SettingsProviderInterface
     public function getCacheOptions()
     {
         return $this->options->getCacheOptions();
-    }
-
-    /**
-     * Sets cacheManager
-     *
-     * @param  CacheManagerInterface $cacheManager
-     * @return self
-     */
-    public function setCacheManager(CacheManagerInterface $cacheManager)
-    {
-        $this->cacheManager = $cacheManager;
-
-        return $this;
-    }
-
-    /**
-     * Gets cacheManager
-     *
-     * @return CacheManagerInterface
-     */
-    public function getCacheManager()
-    {
-        return $this->cacheManager;
     }
 }
