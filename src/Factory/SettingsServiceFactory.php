@@ -15,9 +15,15 @@ class SettingsServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new SettingsService(
-            $serviceLocator->get('HtSettingsModule\Options\ModuleOptions'),
+        $options = $serviceLocator->get('HtSettingsModule\Options\ModuleOptions');
+        $settingsService = new SettingsService(
+            $options,
             $serviceLocator->get('HtSettingsModule_SettingsMappers')
         );
+        if ($options->getCacheOptions()->isEnabled()) {
+            $settingsService->setCacheManager($serviceLocator->get('HtSettingsModule\Service\CacheManager'));
+        }
+
+        return $settingsService;
     }
 }

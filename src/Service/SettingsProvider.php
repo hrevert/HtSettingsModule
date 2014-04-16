@@ -4,7 +4,7 @@ namespace HtSettingsModule\Service;
 use HtSettingsModule\Mapper\SettingsMapperInterface;
 use HtSettingsModule\Options\ModuleOptionsInterface;
 
-class SettingsProvider implements SettingsProviderInterface
+class SettingsProvider implements SettingsProviderInterface, CacheManagerAwareInterface
 {
     /**
      * @var SettingsMapperInterface

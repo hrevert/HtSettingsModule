@@ -6,7 +6,7 @@ use HtSettingsModule\Mapper\SettingsMapperInterface;
 use HtSettingsModule\Exception;
 use ZfcBase\EventManager\EventProvider;
 
-class SettingsService extends EventProvider implements SettingsServiceInterface
+class SettingsService extends EventProvider implements SettingsServiceInterface, CacheManagerAwareInterface
 {
     /**
      * @var ModuleOptionsInterface
@@ -17,6 +17,8 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
      * @var SettingsMapperInterface
      */
     protected $settingsMapper;
+
+    use CacheManagerAwareTrait;
 
     /**
      * Constructor
@@ -65,6 +67,8 @@ class SettingsService extends EventProvider implements SettingsServiceInterface
             }
 
         }
+        $this->getCacheManager()->delete($namespace);
+        $this->getCacheManager()->create($namespace, $settings);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
     }
 
