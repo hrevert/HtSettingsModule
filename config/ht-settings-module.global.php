@@ -40,8 +40,12 @@ $options = [
              *
              * Hydrator class to convert settings array to entity
              *
-             * Name of Hydrator class to use. Default is Zend\Stdlib\Hydrator\ArraySerializable
+             * Default is Zend\Stdlib\Hydrator\ArraySerializable
              * Must implement Zend\Stdlib\Hydrator\HydratorInterface
+             *
+             * Allowed values:
+             * 1) Fully qualified class name
+             * 2) Service Name
              *
             //'hydrator' => 'Zend\Stdlib\Hydrator\ClassMethods',
         ]

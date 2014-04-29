@@ -15,6 +15,19 @@ class ModuleOptionsFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new ModuleOptions($serviceLocator->get('Config')['ht_settings']);
+        $config = $serviceLocator->get('Config')['ht_settings'];
+
+        // check for hydrator service, and if exists, replace service name with object
+        if (isset($config['namespaces'])) {
+            foreach ($config['namespaces'] as $namespace => $namespaceOptions) {
+                if (isset($namespaceOptions['hydrator'])) {
+                    if ($serviceLocator->has($namespaceOptions['hydrator'])) {
+                        $config['namespaces'][$namespace]['hydrator'] = $serviceLocator->get($namespaceOptions['hydrator']);
+                    }
+                }
+            }
+        }
+
+        return new ModuleOptions($config);
     }
 }
