@@ -48,6 +48,20 @@ class SettingsProvider implements SettingsProviderInterface, CacheManagerAwareIn
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getSettingsArray($namespace)
+    {
+        $resultSet = $this->settingsMapper->findByNamespace($namespace);
+        $arraySettings = [];
+        foreach ($resultSet as $parameter) {
+            $arraySettings[$parameter->getName()] = $parameter->getValue();
+        }
+
+        return $arraySettings;
+    }
+
+    /**
      * Gets settings from real source, most probably from database
      *
      * @param  string $namespace
@@ -55,16 +69,12 @@ class SettingsProvider implements SettingsProviderInterface, CacheManagerAwareIn
      */
     protected function getSettingsFromRealSource($namespace)
     {
-        $resultSet = $this->settingsMapper->findByNamespace($namespace);
-        $namespaceOptions = $this->options->getNamespaceOptions($namespace);
-        $entity = clone($namespaceOptions->getEntityPrototype());
-        $arrayData = [];
-        foreach ($resultSet as $parameter) {
-            $arrayData[$parameter->getName()] = $parameter->getValue();
-        }
-        if (!empty($arrayData)) {
+        $arraySettings = $this->getSettingsArray($namespace);
+        if (!empty($arraySettings)) {
+            $namespaceOptions = $this->options->getNamespaceOptions($namespace);
             $hydrator = $namespaceOptions->getHydrator();
-            $entity = $hydrator->hydrate($arrayData, $entity);
+            $entity = clone($namespaceOptions->getEntityPrototype());
+            $entity = $hydrator->hydrate($arraySettings, $entity);
         }
 
         return $entity;
