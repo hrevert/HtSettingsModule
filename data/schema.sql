@@ -7,3 +7,5 @@ CREATE TABLE `settings` (
   `value` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
+
+ALTER TABLE `settings` ADD UNIQUE INDEX settings_index(name,namespace);
