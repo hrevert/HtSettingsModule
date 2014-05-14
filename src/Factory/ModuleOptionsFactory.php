@@ -19,10 +19,11 @@ class ModuleOptionsFactory implements FactoryInterface
 
         // check for hydrator service, and if exists, replace service name with object
         if (isset($config['namespaces'])) {
+            $hydrators = $serviceLocator->get('HydratorManager');
             foreach ($config['namespaces'] as $namespace => $namespaceOptions) {
                 if (isset($namespaceOptions['hydrator'])) {
-                    if ($serviceLocator->has($namespaceOptions['hydrator'])) {
-                        $config['namespaces'][$namespace]['hydrator'] = $serviceLocator->get($namespaceOptions['hydrator']);
+                    if ($hydrators->has($namespaceOptions['hydrator'])) {
+                        $config['namespaces'][$namespace]['hydrator'] = $hydrators->get($namespaceOptions['hydrator']);
                     }
                 }
             }

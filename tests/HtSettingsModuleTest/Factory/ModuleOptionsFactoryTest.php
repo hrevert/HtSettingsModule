@@ -3,6 +3,7 @@ namespace HtSettingsModule\Factory;
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Stdlib\Hydrator\HydratorPluginManager;
 
 class ModuleOptionsFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,7 +20,9 @@ class ModuleOptionsFactoryTest extends \PHPUnit_Framework_TestCase
         $serviceManager = new ServiceManager;
         $factory = new ModuleOptionsFactory;
         $hydrator = new ClassMethods;
-        $serviceManager->setService('ThemeHydrator', $hydrator);
+        $hydrators = new HydratorPluginManager();
+        $hydrators->setService('ThemeHydrator', $hydrator);
+        $serviceManager->setService('HydratorManager', $hydrators);;
         $config = [
             'ht_settings' => [
                 'namespaces' => [
