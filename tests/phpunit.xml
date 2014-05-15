@@ -1,4 +1,8 @@
-﻿<phpunit bootstrap="Bootstrap.php">
+﻿<phpunit bootstrap="Bootstrap.php" 
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+>
     <testsuite name="HtSettingsModuleTest">
         <directory>HtSettingsModuleTest</directory>
     </testsuite>
