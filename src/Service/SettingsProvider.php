@@ -70,10 +70,10 @@ class SettingsProvider implements SettingsProviderInterface, CacheManagerAwareIn
     protected function getSettingsFromRealSource($namespace)
     {
         $arraySettings = $this->getSettingsArray($namespace);
+        $namespaceOptions = $this->options->getNamespaceOptions($namespace);
+        $entity = clone($namespaceOptions->getEntityPrototype());
         if (!empty($arraySettings)) {
-            $namespaceOptions = $this->options->getNamespaceOptions($namespace);
             $hydrator = $namespaceOptions->getHydrator();
-            $entity = clone($namespaceOptions->getEntityPrototype());
             $entity = $hydrator->hydrate($arraySettings, $entity);
         }
 

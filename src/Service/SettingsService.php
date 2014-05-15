@@ -67,8 +67,12 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
             }
 
         }
-        $this->getCacheManager()->delete($namespace);
-        $this->getCacheManager()->create($namespace, $settings);
+
+        if ($this->options->getCacheOptions()->isEnabled()) {
+            $this->getCacheManager()->delete($namespace);
+            $this->getCacheManager()->create($namespace, $settings);            
+        }
+
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
     }
 

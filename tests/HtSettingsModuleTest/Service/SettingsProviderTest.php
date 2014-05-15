@@ -69,5 +69,32 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('red', $settings['color']);
         $this->assertEquals(33, $settings['font_size']);
         $this->assertEquals($settings, $adapter->getItem('theme'));
+
+        $settingsMapper->expects($this->any())
+            ->method('findByNamespace')
+            ->will($this->returnValue([]));
+        $settings = $settingsProvider->getSettings('theme');
+    }
+
+    public function testGetEmptySettingsWhenNoSettingsIsAvailable()
+    {
+        $cacheOptions = new CacheOptions(['enabled' => 'false']);
+        $cacheOptions->setEnabled(false);
+        $options = new ModuleOptions(['cache_options' => $cacheOptions]);
+        $settingsMapper = $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface');
+        $settingsProvider = new SettingsProvider(
+            $options,
+            $settingsMapper
+        );
+        $namespaceOptions = new NamespaceOptions([
+            'entity_class' => 'ArrayObject',
+            'hydrator' => new Hydrator\ArraySerializable,
+        ]);
+        $options->addNamespace($namespaceOptions, 'hockey');
+        $settingsMapper->expects($this->any())
+            ->method('findByNamespace')
+            ->will($this->returnValue([])); 
+            
+        $settings = $settingsProvider->getSettings('hockey');                   
     }
 }
