@@ -78,8 +78,7 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetEmptySettingsWhenNoSettingsIsAvailable()
     {
-        $cacheOptions = new CacheOptions(['enabled' => 'false']);
-        $cacheOptions->setEnabled(false);
+        $cacheOptions = new CacheOptions();
         $options = new ModuleOptions(['cache_options' => $cacheOptions]);
         $settingsMapper = $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface');
         $settingsProvider = new SettingsProvider(
