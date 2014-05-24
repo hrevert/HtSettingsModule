@@ -6,8 +6,7 @@ interface ModuleOptionsInterface
     /**
      * Gets options of cache
      *
-     * @param CacheOptionsInterface
-     * @return self
+     * @return CacheOptionsInterface
      */
     public function getCacheOptions();
 
