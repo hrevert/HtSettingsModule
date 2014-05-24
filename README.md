@@ -4,6 +4,8 @@ HtSettingsModule
 [![Latest Stable Version](https://poser.pugx.org/hrevert/ht-settings-module/v/stable.png)](https://packagist.org/packages/hrevert/ht-settings-module)
 [![Latest Unstable Version](https://poser.pugx.org/hrevert/ht-settings-module/v/unstable.png)](https://packagist.org/packages/hrevert/ht-settings-module)
 [![Total Downloads](https://poser.pugx.org/hrevert/ht-settings-module/downloads.png)](https://packagist.org/packages/hrevert/ht-settings-module)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hrevert/HtSettingsModule/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hrevert/HtSettingsModule/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/hrevert/HtSettingsModule/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/hrevert/HtSettingsModule/?branch=master)
 
 HtSettingsModule is a module for adding settings support to your Zend Framework 2 application.
 
