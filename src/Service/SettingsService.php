@@ -83,6 +83,9 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
     {
         $eventParams = ['namespace' => $namespace, 'name' => $name, 'value' => $value];
         $this->getEventManager()->trigger(__FUNCTION__, $this, $eventParams);
+        if ($this->options->getCacheOptions()->isEnabled()) {
+            $this->getCacheManager()->delete($namespace);            
+        }
         $parameter = $this->settingsMapper->findParameter($namespace, $name);
         if ($parameter) {
             if ($parameter->getValue() != $value) {
