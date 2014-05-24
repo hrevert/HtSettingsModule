@@ -47,7 +47,7 @@ class Module implements
         return [
             'factories' => [
                 'HtSettingsModule\Options\ModuleOptions' => 'HtSettingsModule\Factory\ModuleOptionsFactory',
-                'HtSettingsModule_SettingsMappers' => 'HtSettingsModule\Factory\SettingsMapperFactory',
+                'HtSettingsModule_SettingsMapper' => 'HtSettingsModule\Factory\SettingsMapperFactory',
                 'HtSettingsModule\Service\CacheManager'=> 'HtSettingsModule\Factory\CacheManagerFactory',
                 'HtSettingsModule\Service\SettingsProvider'=> 'HtSettingsModule\Factory\SettingsProviderFactory',
                 'HtSettingsModule\Service\SettingsService'=> 'HtSettingsModule\Factory\SettingsServiceFactory',

@@ -13,7 +13,7 @@ class SettingsProviderFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new SettingsProviderFactory;
         $options = new ModuleOptions;
         $serviceManager->setService('HtSettingsModule\Options\ModuleOptions', $options);
-        $serviceManager->setService('HtSettingsModule_SettingsMappers', $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface'));
+        $serviceManager->setService('HtSettingsModule_SettingsMapper', $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface'));
         $this->assertInstanceOf('HtSettingsModule\Service\SettingsProvider', $factory->createService($serviceManager));
         $options->getCacheOptions()->setEnabled(true);
         $serviceManager->setService('HtSettingsModule\Service\CacheManager', $this->getMock('HtSettingsModule\Service\CacheManagerInterface'));
