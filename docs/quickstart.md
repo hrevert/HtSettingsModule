@@ -75,17 +75,37 @@ $settingsService->save($settings, 'theme'); // done
 ```
 
 ## Retrieving settings
-From ServiceLocatorAware classes:
+#### From ServiceLocatorAware classes:
 ```php
 $themeSettings = $this->getServiceLocator()->get('HtSettingsModule\Service\SettingsProvider')->getSettings('theme');
 echo $themeSettings->getFontSize();   // will print 25
 echo $themeSettings->getFontColor();   // will print red
 ```
-From controller:
+
+You can also use `HtSettingsModule\Service\SettingsAbstractFactory` to get settings directly from service manager.
+
+```php
+// module.config.php
+return [
+    'service_manager' => [
+        'abstract_factories' => [
+            'HtSettingsModule\Service\SettingsAbstractFactory',
+        ]
+    ]
+];
+```
+So, you can get settings directly from service manager like this:
+
+```php
+$themeSettings = $this->getServiceLocator->get('settings.theme');
+```
+
+#### From controller:
 ```php
 $themeSettings = $this->settings('theme');
 ```
-From view templates:
+
+#### From view templates:
 ```php
 $themeSettings = $this->settings('theme');
 ```
