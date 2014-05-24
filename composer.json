@@ -18,18 +18,21 @@
     ],
     "require": {
         "php": ">=5.4",
-        "zendframework/zend-mvc": "~2.2",
-        "zendframework/zend-view": "~2.2",
         "zendframework/zend-servicemanager": "~2.2",
-        "zendframework/zend-modulemanager": "~2.2",
         "zendframework/zend-stdlib": "~2.2",
         "zf-commons/zfc-base": "0.1.*"
     },
     "require-dev": {
-        "zendframework/zend-cache": "~2.2"
+        "zendframework/zend-cache": "~2.2",
+        "zendframework/zend-modulemanager": "~2.2",
+        "zendframework/zend-mvc": "~2.2",
+        "zendframework/zend-view": "~2.2"
     },
     "suggest": {
-        "zendframework/zend-cache": "if you want to cache settings"
+        "zendframework/zend-cache": "if you want to cache settings",
+        "zendframework/zend-modulemanager": "To use it as a Zend Framework 2 module",
+        "zendframework/zend-mvc": "To use with Zend Framework 2 MVC",
+        "zendframework/zend-view": "To use some view helpers"
     },
     "autoload": {
         "psr-4": {
