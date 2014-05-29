@@ -10,7 +10,7 @@ HtSettingsModule
 HtSettingsModule is a module for adding settings support to your Zend Framework 2 application.
 This module does not provide any GUI for settings. It just provides a way for easy persistence of application settings.
 
-## Gettings started guide
+## Getting started guide
 ##### Storing settings
 ```php
 // From Controller
