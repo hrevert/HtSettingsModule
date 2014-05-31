@@ -8,6 +8,25 @@ HtSettingsModule
 [![Code Coverage](https://scrutinizer-ci.com/g/hrevert/HtSettingsModule/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/hrevert/HtSettingsModule/?branch=master)
 
 HtSettingsModule is a module for adding settings support to your Zend Framework 2 application.
+This module does not provide any GUI for settings. It just provides a way for easy persistence of application settings.
+
+## Getting started guide
+##### Storing settings
+```php
+// From Controller
+$this->getServiceLocator()->get('HtSettingsModule\Service\SettingsService')->save($settingsEntity, 'SETTINGS_NAMESPACE');
+```
+##### Retrieving settings
+```php
+// From Controller
+$settingsEntity = $this->settings('SETTINGS_NAMESPACE');
+
+// From view templates
+$settingsEntity = $this->settings('SETTINGS_NAMESPACE');
+
+// From ServiceLocatorAware classes
+$settingsEntity = $this->getServiceLocator()->get('HtSettingsModule\Service\SettingsProvider')->getSettings('SETTINGS_NAMESPACE');
+```
 
 ## Installation
 * Add `"hrevert/ht-settings-module": "dev-master"` to composer.json and run `php composer.phar update`
