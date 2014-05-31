@@ -44,7 +44,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
             $namespace = $namespaceOptions->getName();
         }
 
-        $namespaceParameters = $this->settingsMapper->findByNamespace($namespace);
+        $namespaceParameters = iterator_to_array($this->settingsMapper->findByNamespace($namespace));
         $arrayData = $namespaceOptions->getHydrator()->extract($settings);
         $eventParams = ['settings' => $settings, 'array_data' => $arrayData, 'namespace' => $namespace];
         $this->getEventManager()->trigger(__FUNCTION__, $this, $eventParams);
