@@ -63,21 +63,26 @@ This is pretty straight forward. Here, `theme` is a namespace. Namespaces allow 
 
 
 ## Storing data
-From ServiceLocatorAware classes:
+#### From ServiceManager:
 
 ```php
 <?php
 $settings = new Application\Model\Theme();
 $settings->setFontSize(25);
 $settings->setFontColor('red');
-$settingsService = $this->getServiceLocator()->get('HtSettingsModule\Service\SettingsService');
-$settingsService->save($settings, 'theme'); // done
+$settingsManager = $this->getServiceLocator()->get('HtSettingsManager');
+$settingsManager->save($settings, 'theme'); // done
+```
+
+#### From Controller
+```php
+$this->settings()->save($settings, 'theme');
 ```
 
 ## Retrieving settings
-#### From ServiceLocatorAware classes:
+#### From ServiceManager:
 ```php
-$themeSettings = $this->getServiceLocator()->get('HtSettingsModule\Service\SettingsProvider')->getSettings('theme');
+$themeSettings = $this->getServiceLocator()->get('HtSettingsManager')->getSettings('theme');
 echo $themeSettings->getFontSize();   // will print 25
 echo $themeSettings->getFontColor();   // will print red
 ```
