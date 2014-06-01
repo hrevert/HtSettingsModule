@@ -15,7 +15,8 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
     {
         $settingsProvider = new SettingsProvider(
             new ModuleOptions,
-            $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface')
+            $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface'),
+            $this->getMock('HtSettingsModule\Service\NamespaceHydratorProviderInerface')
         );
         $cacheManager = $this->getMock('HtSettingsModule\Service\CacheManagerInterface');
         $settingsProvider->setCacheManager($cacheManager);
@@ -29,7 +30,8 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
         $options->setCacheOptions($cacheOptions);
         $settingsProvider = new SettingsProvider(
             $options,
-            $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface')
+            $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface'),
+            $this->getMock('HtSettingsModule\Service\NamespaceHydratorProviderInerface')
         );
         $cacheManager = $this->getMock('HtSettingsModule\Service\CacheManagerInterface');
         $settingsProvider->setCacheManager($cacheManager);
@@ -52,14 +54,21 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
         $options = new ModuleOptions;
         $options->setCacheOptions($cacheOptions);
         $settingsMapper = $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface');
+        $namespaceHydratorProvider = $this->getMockBuilder('HtSettingsModule\Service\NamespaceHydratorProviderInerface')
+            ->disableOriginalConstructor()
+            ->getMock();
         $settingsProvider = new SettingsProvider(
             $options,
-            $settingsMapper
+            $settingsMapper,
+            $namespaceHydratorProvider
         );
         $namespaceOptions = new NamespaceOptions([
-            'entity_class' => 'ArrayObject',
-            'hydrator' => new Hydrator\ArraySerializable,
+            'entity_class' => 'ArrayObject'
         ]);
+        $namespaceHydratorProvider->expects($this->once())
+            ->method('getHydrator')
+            ->with('theme')
+            ->will($this->returnValue(new Hydrator\ArraySerializable));
         $options->addNamespace($namespaceOptions, 'theme');
         $settingsProvider->setCacheManager($cacheManager);
         $settingsMapper->expects($this->any())
@@ -81,9 +90,13 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
         $cacheOptions = new CacheOptions();
         $options = new ModuleOptions(['cache_options' => $cacheOptions]);
         $settingsMapper = $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface');
+        $namespaceHydratorProvider = $this->getMockBuilder('HtSettingsModule\Service\NamespaceHydratorProviderInerface')
+            ->disableOriginalConstructor()
+            ->getMock();
         $settingsProvider = new SettingsProvider(
             $options,
-            $settingsMapper
+            $settingsMapper,
+            $namespaceHydratorProvider
         );
         $namespaceOptions = new NamespaceOptions([
             'entity_class' => 'ArrayObject',

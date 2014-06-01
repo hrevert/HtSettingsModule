@@ -9,7 +9,7 @@ interface SettingsMapperInterface
      * Gets rows of a namespace
      *
      * @param  string             $namespace
-     * @return array|\Traversable
+     * @return array
      */
     public function findByNamespace($namespace);
 

@@ -20,7 +20,7 @@ interface NamespaceOptionsInterface
     /**
      * Gets hydrator of namespace entity for converting array to namespace entity
      *
-     * @return \Zend\Stdlib\Hydrator\HydratorInterface
+     * @return \Zend\Stdlib\Hydrator\HydratorInterface|string
      */
     public function getHydrator();
 }

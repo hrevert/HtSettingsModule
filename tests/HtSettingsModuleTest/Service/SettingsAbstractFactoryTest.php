@@ -16,7 +16,16 @@ class SettingsAbstractFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCanCreateService()
     {
         $serviceManager = new ServiceManager();
+        $options = $this->getMock('HtSettingsModule\Options\ModuleOptionsInterface');
+        $options->expects($this->exactly(2))
+            ->method('hasNamespace')
+            ->will($this->returnValueMap([
+                ['theme', true],
+                ['network', false],
+            ]));
+        $serviceManager->setService('HtSettingsModule\Options\ModuleOptions', $options);
         $this->assertTrue($this->settingsAbstractFactory->canCreateServiceWithName($serviceManager, 'asfdsaf', 'settings.theme'));
+        $this->assertFalse($this->settingsAbstractFactory->canCreateServiceWithName($serviceManager, 'asfdsaf', 'settings.network'));
         $this->assertFalse($this->settingsAbstractFactory->canCreateServiceWithName($serviceManager, 'asfdsaf', 'asfdsaf'));
     }
 

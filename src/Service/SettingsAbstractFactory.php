@@ -14,7 +14,9 @@ class SettingsAbstractFactory implements AbstractFactoryInterface
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         if (strpos($requestedName, static::PREFIX) === 0) {
-            return true;
+            $options = $serviceLocator->get('HtSettingsModule\Options\ModuleOptions');
+            $namespace = $this->getNamespace($requestedName);
+            return $options->hasNamespace($namespace);
         }
 
         return false;
@@ -26,8 +28,13 @@ class SettingsAbstractFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $settingsProvider = $serviceLocator->get('HtSettingsModule\Service\SettingsProvider');
-        $namespace = substr($requestedName, strlen(static::PREFIX));
+        $namespace = $this->getNamespace($requestedName);
 
         return $settingsProvider->getSettings($namespace);
+    }
+
+    protected function getNamespace($requestedName)
+    {
+        return substr($requestedName, strlen(static::PREFIX));
     }
 }

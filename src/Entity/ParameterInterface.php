@@ -3,7 +3,6 @@ namespace HtSettingsModule\Entity;
 
 interface ParameterInterface
 {
-
     /**
      * Sets Parameter id
      *
@@ -60,4 +59,14 @@ interface ParameterInterface
      * @param mixed $value
      */
     public function setValue($value);
+
+    /**
+     * Creates a new entity
+     *
+     * @param string $namespace
+     * @param string $name
+     * @param mixed $value
+     * @return static
+     */
+    public static function create($namespace, $name, $value);
 }

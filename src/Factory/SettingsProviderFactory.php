@@ -18,7 +18,8 @@ class SettingsProviderFactory implements FactoryInterface
         $options = $serviceLocator->get('HtSettingsModule\Options\ModuleOptions');
         $settingsProvider = new SettingsProvider(
             $options,
-            $serviceLocator->get('HtSettingsModule_SettingsMapper')
+            $serviceLocator->get('HtSettingsModule_SettingsMapper'),
+            $serviceLocator->get('HtSettingsModule\Service\NamespaceHydratorProvider')
         );
         if ($options->getCacheOptions()->isEnabled()) {
             $settingsProvider->setCacheManager($serviceLocator->get('HtSettingsModule\Service\CacheManager'));

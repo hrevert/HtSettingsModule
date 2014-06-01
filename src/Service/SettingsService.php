@@ -18,6 +18,11 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
      */
     protected $settingsMapper;
 
+    /**
+     * @var NamespaceHydratorProviderInerface
+     */
+    protected $namespaceHydratorProvider;
+
     use CacheManagerAwareTrait;
 
     /**
@@ -25,11 +30,17 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
      *
      * @param ModuleOptionsInterface  $options
      * @param SettingsMapperInterface $settingsMapper
+     * @param NamespaceHydratorProviderInerface $namespaceHydratorProvider
      */
-    public function __construct(ModuleOptionsInterface $options, SettingsMapperInterface $settingsMapper)
+    public function __construct(
+        ModuleOptionsInterface $options,
+        SettingsMapperInterface $settingsMapper,
+        NamespaceHydratorProviderInerface $namespaceHydratorProvider
+    )
     {
         $this->options = $options;
         $this->settingsMapper = $settingsMapper;
+        $this->namespaceHydratorProvider = $namespaceHydratorProvider;
     }
 
     /**
@@ -37,15 +48,13 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
      */
     public function save($settings, $namespace = null)
     {
-        if ($namespace !== null) {
-            $namespaceOptions = $this->options->getNamespaceOptions($namespace);
-        } else {            
-            $namespaceOptions = $this->detectNamespace($settings);
-            $namespace = $namespaceOptions->getName();
+        if ($namespace === null) {
+            $namespace = $this->detectNamespace($settings);
         }
 
-        $namespaceParameters = iterator_to_array($this->settingsMapper->findByNamespace($namespace));
-        $arrayData = $namespaceOptions->getHydrator()->extract($settings);
+        $namespaceParameters = $this->settingsMapper->findByNamespace($namespace);
+        $hydrator = $this->namespaceHydratorProvider->getHydrator($namespace);
+        $arrayData = $hydrator->extract($settings);
         $eventParams = ['settings' => $settings, 'array_data' => $arrayData, 'namespace' => $namespace];
         $this->getEventManager()->trigger(__FUNCTION__, $this, $eventParams);
         foreach ($arrayData as $name => $value) {
@@ -58,10 +67,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
                 }
             } else {
                 $parameterEntityClass = $this->options->getParameterEntityClass();
-                $parameter = new $parameterEntityClass;
-                $parameter->setNamespace($namespace);
-                $parameter->setName($name);
-                $parameter->setValue($value);
+                $parameter = $parameterEntityClass::create($namespace, $name, $value);
                 $this->getEventManager()->trigger('insertParameter', $this, ['parameter' => $parameter]);
                 $this->settingsMapper->insertParameter($parameter);
             }
@@ -110,7 +116,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
      *
      * @param  string                                           $namespace
      * @param  string                                           $name
-     * @param  array|\Traversable                               $namespaceParameters
+     * @param  array                                            $namespaceParameters
      * @return \HtSettingsModule\Entity\ParameterInterface|null
      */
     protected function findParameter($namespace, $name, $namespaceParameters)
@@ -128,7 +134,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
      * Tries to detect namespace from modal class
      *
      * @param  object                                              $settings
-     * @return \HtSettingsModule\Options\NamespaceOptionsInterface
+     * @return string
      * @throws Exception\InvalidArgumentException
      */
     protected function detectNamespace($settings)
@@ -136,7 +142,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
         foreach ($this->options->getNamespaces() as $namespaceOptions) {
             $namespaceEntityClass = $namespaceOptions->getEntityClass();
             if ($settings instanceof $namespaceEntityClass) {
-                return $namespaceOptions;
+                return $namespaceOptions->getName();
             }
         }
 
