@@ -19,7 +19,7 @@ return [
     ],
     'controller_plugins' => [
         'factories' => [
-            'HtSettingsModule\Controller\Plugin\SettingsPlugin' => 'HtSettingsModule\Controller\Plugin\Factory\SettingsProviderFactory',
+            'HtSettingsModule\Controller\Plugin\SettingsPlugin' => 'HtSettingsModule\Controller\Plugin\Factory\SettingsPluginFactory',
         ],
         'aliases' => [
             'settings' => 'HtSettingsModule\Controller\Plugin\SettingsPlugin',
