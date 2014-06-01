@@ -63,7 +63,7 @@ This is pretty straight forward. Here, `theme` is a namespace. Namespaces allow 
 
 
 ## Storing data
-#### From ServiceManager:
+##### From ServiceManager:
 
 ```php
 <?php
