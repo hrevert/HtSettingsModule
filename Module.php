@@ -52,9 +52,11 @@ class Module implements
                 'HtSettingsModule\Service\SettingsProvider'=> 'HtSettingsModule\Factory\SettingsProviderFactory',
                 'HtSettingsModule\Service\SettingsService'=> 'HtSettingsModule\Factory\SettingsServiceFactory',
                 'HtSettingsModule\Service\NamespaceHydratorProvider'=> 'HtSettingsModule\Factory\NamespaceHydratorProviderFactory',
+                'HtSettingsModule\Manager\SettingsManager'=> 'HtSettingsModule\Factory\SettingsManagerFactory',
             ],
             'aliases' => [
                 'HtSettingsModule\DbAdapter' => 'Zend\Db\Adapter\Adapter',
+                'HtSettingsManager' => 'HtSettingsModule\Manager\SettingsManager',
             ]
         ];
     }
@@ -66,10 +68,10 @@ class Module implements
     {
         return [
             'factories' => [
-                'HtSettingsModule\Controller\Plugin\SettingsProvider' => 'HtSettingsModule\Controller\Plugin\Factory\SettingsProviderFactory',
+                'HtSettingsModule\Controller\Plugin\SettingsPlugin' => 'HtSettingsModule\Controller\Plugin\Factory\SettingsProviderFactory',
             ],
             'aliases' => [
-                'settings' => 'HtSettingsModule\Controller\Plugin\SettingsProvider',
+                'settings' => 'HtSettingsModule\Controller\Plugin\SettingsPlugin',
              ]
         ];
     }

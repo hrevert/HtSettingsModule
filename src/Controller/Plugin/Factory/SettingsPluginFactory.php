@@ -3,9 +3,9 @@ namespace HtSettingsModule\Controller\Plugin\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use HtSettingsModule\Controller\Plugin\SettingsProvider;
+use HtSettingsModule\Controller\Plugin\SettingsPlugin;
 
-class SettingsProviderFactory implements FactoryInterface
+class SettingsPluginFactory implements FactoryInterface
 {
     /**
      * @param  ServiceLocatorInterface $serviceLocator
@@ -13,6 +13,6 @@ class SettingsProviderFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $plugins)
     {
-        return new SettingsProvider($plugins->getServiceLocator()->get('HtSettingsModule\Service\SettingsProvider'));
+        return new SettingsPlugin($plugins->getServiceLocator()->get('HtSettingsModule\Manager\SettingsManager'));
     }
 }
