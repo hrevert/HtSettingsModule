@@ -102,7 +102,7 @@ return [
 So, you can get settings directly from service manager like this:
 
 ```php
-$themeSettings = $this->getServiceLocator->get('settings.theme');
+$themeSettings = $this->getServiceLocator()->get('settings.theme');
 ```
 
 #### From controller:
