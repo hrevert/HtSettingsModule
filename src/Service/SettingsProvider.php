@@ -16,17 +16,29 @@ class SettingsProvider implements SettingsProviderInterface, CacheManagerAwareIn
      */
     protected $options;
 
+    /**
+     * @var NamespaceHydratorProviderInerface
+     */
+    protected $namespaceHydratorProvider;
+
     use CacheManagerAwareTrait;
 
     /**
      * Constructor
      *
      * @param ModuleOptionsInterface $options
+     * @param SettingsMapperInterface $settingsMapper
+     * @param NamespaceHydratorProviderInerface $namespaceHydratorProvider
      */
-    public function __construct(ModuleOptionsInterface $options, SettingsMapperInterface $settingsMapper)
+    public function __construct(
+        ModuleOptionsInterface $options,
+        SettingsMapperInterface $settingsMapper,
+        NamespaceHydratorProviderInerface $namespaceHydratorProvider
+    )
     {
         $this->options = $options;
         $this->settingsMapper = $settingsMapper;
+        $this->namespaceHydratorProvider = $namespaceHydratorProvider;
     }
 
     /**
@@ -73,7 +85,7 @@ class SettingsProvider implements SettingsProviderInterface, CacheManagerAwareIn
         $namespaceOptions = $this->options->getNamespaceOptions($namespace);
         $entity = clone($namespaceOptions->getEntityPrototype());
         if (!empty($arraySettings)) {
-            $hydrator = $namespaceOptions->getHydrator();
+            $hydrator = $this->namespaceHydratorProvider->getHydrator($namespace);
             $entity = $hydrator->hydrate($arraySettings, $entity);
         }
 

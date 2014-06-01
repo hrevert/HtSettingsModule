@@ -21,6 +21,9 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
                     'entity_class' => 'ArrayObject',
                     'hydrator' => 'Zend\Stdlib\Hydrator\ArraySerializable',
                 ],
+                'network' => [
+                    'entity_prototype' => new \ArrayObject,
+                ],
             ],
             'cache_options' => [
                 'enabled' => true,
@@ -31,19 +34,26 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('app_settings', $options->getSettingsTable());
         $this->assertEquals('Application\Entity\SettingsParameter', $options->getParameterEntityClass());
+
         $cacheOptions = $options->getCacheOptions();
         $this->assertTrue($cacheOptions->isEnabled());
         $this->assertEquals(['theme'], $cacheOptions->getNamespaces());
         $this->assertEquals('Zend\Cache\Storage\Adapter\Memcached', $cacheOptions->getAdapter());
-        $this->assertCount(2, $options->getNamespaces());
+
+        $this->assertCount(3, $options->getNamespaces());
+
         $cricketOptions = $options->getNamespaceOptions('cricket');
         $this->assertInstanceOf('HtSettingsModule\Entity\Parameter', $cricketOptions->getEntityPrototype());
-        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ClassMethods', $cricketOptions->getHydrator());
+        $this->assertEquals('Zend\Stdlib\Hydrator\ClassMethods', $cricketOptions->getHydrator());
         $this->assertEquals('cricket', $cricketOptions->getName());
+
         $footballOptions = $options->getNamespaceOptions('football');
         $this->assertInstanceOf('ArrayObject', $footballOptions->getEntityPrototype());
-        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ArraySerializable', $footballOptions->getHydrator());
+        $this->assertEquals('Zend\Stdlib\Hydrator\ArraySerializable', $footballOptions->getHydrator());
         $this->assertEquals('football', $footballOptions->getName());
+
+        $networkOptions = $options->getNamespaceOptions('network');
+        $this->assertInstanceOf('ArrayObject', $networkOptions->getEntityPrototype());
     }
 
     public function testGetExceptionWithInvalidNamespace()

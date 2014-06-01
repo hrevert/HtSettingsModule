@@ -135,6 +135,14 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function hasNamespace($namespace)
+    {
+        return isset($this->namespaces[$namespace]);
+    }
+
+    /**
      * Sets table name of settings
      *
      * @param  string|\Zend\Db\Sql\TableIdentifier $settingsTable

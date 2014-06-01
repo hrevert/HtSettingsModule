@@ -13,7 +13,8 @@ class SettingsServiceTest extends \PHPUnit_Framework_TestCase
         $settingsMapper = $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface');
         $settingsService= new SettingsService(
             $options,
-            $settingsMapper
+            $settingsMapper,
+            $this->getMock('HtSettingsModule\Service\NamespaceHydratorProviderInerface')
         );
 
         $namespace  = 'network_settings';
@@ -45,7 +46,8 @@ class SettingsServiceTest extends \PHPUnit_Framework_TestCase
         $settingsMapper = $this->getMock('HtSettingsModule\Mapper\SettingsMapperInterface');
         $settingsService= new SettingsService(
             $options,
-            $settingsMapper
+            $settingsMapper,
+            $this->getMock('HtSettingsModule\Service\NamespaceHydratorProviderInerface')
         );
 
         $namespace  = 'network_settings';

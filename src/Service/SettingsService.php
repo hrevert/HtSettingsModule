@@ -18,6 +18,11 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
      */
     protected $settingsMapper;
 
+    /**
+     * @var NamespaceHydratorProviderInerface
+     */
+    protected $namespaceHydratorProvider;
+
     use CacheManagerAwareTrait;
 
     /**
@@ -25,11 +30,17 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
      *
      * @param ModuleOptionsInterface  $options
      * @param SettingsMapperInterface $settingsMapper
+     * @param NamespaceHydratorProviderInerface $namespaceHydratorProvider
      */
-    public function __construct(ModuleOptionsInterface $options, SettingsMapperInterface $settingsMapper)
+    public function __construct(
+        ModuleOptionsInterface $options,
+        SettingsMapperInterface $settingsMapper,
+        NamespaceHydratorProviderInerface $namespaceHydratorProvider
+    )
     {
         $this->options = $options;
         $this->settingsMapper = $settingsMapper;
+        $this->namespaceHydratorProvider = $namespaceHydratorProvider;
     }
 
     /**
@@ -45,7 +56,8 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
         }
 
         $namespaceParameters = iterator_to_array($this->settingsMapper->findByNamespace($namespace));
-        $arrayData = $namespaceOptions->getHydrator()->extract($settings);
+        $hydrator = $this->namespaceHydratorProvider->getHydrator($namespace);
+        $arrayData = $hydrator->extract($settings);
         $eventParams = ['settings' => $settings, 'array_data' => $arrayData, 'namespace' => $namespace];
         $this->getEventManager()->trigger(__FUNCTION__, $this, $eventParams);
         foreach ($arrayData as $name => $value) {

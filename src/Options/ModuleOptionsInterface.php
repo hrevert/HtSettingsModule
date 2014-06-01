@@ -18,6 +18,13 @@ interface ModuleOptionsInterface
     public function getNamespaces();
 
     /**
+     * Checks if namespace exists
+     *
+     * @return bool
+     */
+    public function hasNamespace($namespace);
+
+    /**
      * Gets options for a namespace
      *
      * @param  string                    $namespace
