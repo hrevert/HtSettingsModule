@@ -122,4 +122,18 @@ class Parameter implements ParameterInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function create($namespace, $name, $value = null, $id = null)
+    {
+        $parameter = new static;
+        $parameter->setNamespace($namespace);
+        $parameter->setName($name);
+        $parameter->setValue($value);
+        $parameter->setId($id);
+
+        return $parameter;
+    }
 }

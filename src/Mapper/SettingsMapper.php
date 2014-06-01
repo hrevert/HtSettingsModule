@@ -14,8 +14,9 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
     {
         $select = $this->getSelect();
         $select->where(['namespace' => $namespace]);
+        $resultSet = $this->select($select);
 
-        return $this->select($select);
+        return iterator_to_array($resultSet);
     }
 
     /**
