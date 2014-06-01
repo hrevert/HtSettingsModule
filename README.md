@@ -13,19 +13,22 @@ This module does not provide any GUI for settings. It just provides a way for ea
 ## Getting started guide
 ##### Storing settings
 ```php
+// From ServiceManager
+$this->getServiceLocator()->get('HtSettingsManager')->save($settingsEntity, 'settings_namespace');
+
 // From Controller
-$this->getServiceLocator()->get('HtSettingsModule\Service\SettingsService')->save($settingsEntity, 'SETTINGS_NAMESPACE');
+$this->settings()->save($settingsEntity, 'settings_namespace');
 ```
 ##### Retrieving settings
 ```php
 // From Controller
-$settingsEntity = $this->settings('SETTINGS_NAMESPACE');
+$settingsEntity = $this->settings('settings_namespace');
 
 // From view templates
-$settingsEntity = $this->settings('SETTINGS_NAMESPACE');
+$settingsEntity = $this->settings('settings_namespace');
 
 // From ServiceLocatorAware classes
-$settingsEntity = $this->getServiceLocator()->get('HtSettingsModule\Service\SettingsProvider')->getSettings('SETTINGS_NAMESPACE');
+$settingsEntity = $this->getServiceLocator()->get('HtSettingsManager')->getSettings('settings_namespace');
 ```
 
 ## Installation
