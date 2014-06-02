@@ -1,9 +1,7 @@
 <?php
-namespace HtSettingsModule\Factory;
+namespace HtSettingsModuleTest\Factory;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\Hydrator\ClassMethods;
-use Zend\Stdlib\Hydrator\HydratorPluginManager;
 
 class ModuleOptionsFactoryTest extends \PHPUnit_Framework_TestCase
 {

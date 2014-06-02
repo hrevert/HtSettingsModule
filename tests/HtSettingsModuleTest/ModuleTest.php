@@ -10,5 +10,5 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $module = new Module();
         $this->assertInternalType('array', $module->getConfig());
         $this->assertInternalType('array', $module->getAutoloaderConfig());
-    }    
+    }
 }

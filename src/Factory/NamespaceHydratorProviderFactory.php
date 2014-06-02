@@ -10,7 +10,7 @@ class NamespaceHydratorProviderFactory implements FactoryInterface
     /**
      * Gets NamespaceHydratorProvider
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface   $serviceLocator
      * @return NamespaceHydratorProvider
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -19,5 +19,5 @@ class NamespaceHydratorProviderFactory implements FactoryInterface
             $serviceLocator->get('HydratorManager'),
             $serviceLocator->get('HtSettingsModule\Options\ModuleOptions')
         );
-    }    
+    }
 }

@@ -1,7 +1,6 @@
 <?php
-namespace HtSettingsModule\Factory;
+namespace HtSettingsModuleTest\Factory;
 
-use HtSettingsModule\Factory\SettingsManagerFactory;
 use Zend\ServiceManager\ServiceManager;
 
 class SettingsManagerFactoryTest extends \PHPUnit_Framework_TestCase

@@ -105,8 +105,8 @@ class SettingsProviderTest extends \PHPUnit_Framework_TestCase
         $options->addNamespace($namespaceOptions, 'hockey');
         $settingsMapper->expects($this->any())
             ->method('findByNamespace')
-            ->will($this->returnValue([])); 
-            
-        $settings = $settingsProvider->getSettings('hockey');                   
+            ->will($this->returnValue([]));
+
+        $settings = $settingsProvider->getSettings('hockey');
     }
 }

@@ -29,5 +29,5 @@ trait CacheManagerAwareTrait
     public function getCacheManager()
     {
         return $this->cacheManager;
-    }    
+    }
 }

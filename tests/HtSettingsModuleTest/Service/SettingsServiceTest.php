@@ -1,12 +1,11 @@
 <?php
-namespace HtSettingsModulerTest\Service;
+namespace HtSettingsModuleTest\Service;
 
 use ArrayObject;
 use HtSettingsModule\Service\SettingsService;
 use HtSettingsModule\Options\ModuleOptions;
 use HtSettingsModule\Entity\Parameter;
 use Zend\Stdlib\Hydrator;
-use Zend\Stdlib\ArrayUtils;
 use HtSettingsModuleTest\Model\Theme;
 
 class SettingsServiceTest extends \PHPUnit_Framework_TestCase
@@ -122,22 +121,22 @@ class SettingsServiceTest extends \PHPUnit_Framework_TestCase
             ->with($namespace)
             ->will($this->returnValue($namespaceParameters));//var_dump($settingsMapper->findByNamespace($namespace));exit();
 
-        $updateParameter1 =  Parameter::create($namespace, 'color', 'black'); 
+        $updateParameter1 =  Parameter::create($namespace, 'color', 'black');
         $settingsMapper->expects($this->at(1))
             ->method('updateParameter')
             ->with($updateParameter1);
 
-        $updateParameter2 =  Parameter::create($namespace, 'interval', 12); 
+        $updateParameter2 =  Parameter::create($namespace, 'interval', 12);
         $settingsMapper->expects($this->at(2))
             ->method('updateParameter')
             ->with($updateParameter2);
 
-        $insertParameter1 =  Parameter::create($namespace, 'height', 12); 
+        $insertParameter1 =  Parameter::create($namespace, 'height', 12);
         $settingsMapper->expects($this->at(3))
             ->method('insertParameter')
             ->with($insertParameter1);
 
-        $insertParameter2 =  Parameter::create($namespace, 'width', 6); 
+        $insertParameter2 =  Parameter::create($namespace, 'width', 6);
         $settingsMapper->expects($this->at(4))
             ->method('insertParameter')
             ->with($insertParameter2);
@@ -179,14 +178,14 @@ class SettingsServiceTest extends \PHPUnit_Framework_TestCase
             $settingsMapper,
             $this->getMock('HtSettingsModule\Service\NamespaceHydratorProviderInerface')
         );
-        
+
         $options->addNamespace([
             'entity_class' => 'HtSettingsModuleTest\Model\Theme',
-        ], 'theme');      
+        ], 'theme');
 
         $options->addNamespace([
             'entity_class' => 'ArrayObject',
-        ], 'network'); 
+        ], 'network');
 
         $reflectionMethod = new \ReflectionMethod($settingsService, 'detectNamespace');
         $reflectionMethod->setAccessible(true);

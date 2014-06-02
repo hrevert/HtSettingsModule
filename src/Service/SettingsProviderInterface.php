@@ -9,7 +9,7 @@ interface SettingsProviderInterface
      * @param  string $namespace
      * @return array
      */
-    public function getSettingsArray($namespace);    
+    public function getSettingsArray($namespace);
 
     /**
      * Gets settings of a namespace

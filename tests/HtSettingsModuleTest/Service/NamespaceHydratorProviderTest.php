@@ -85,7 +85,7 @@ class NamespaceHydratorProviderTest extends \PHPUnit_Framework_TestCase
             ->with('plugin')
             ->will($this->returnValue($namespaceOptions));
 
-        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ClassMethods', $namespaceHydratorProvider->getHydrator('plugin'));        
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ClassMethods', $namespaceHydratorProvider->getHydrator('plugin'));
     }
 
     public function testGetExceptionWithNoHydrator()
@@ -114,6 +114,6 @@ class NamespaceHydratorProviderTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($namespaceOptions));
 
         $this->setExpectedException('HtSettingsModule\Exception\RuntimeException');
-        $namespaceHydratorProvider->getHydrator('plugin');         
+        $namespaceHydratorProvider->getHydrator('plugin');
     }
 }

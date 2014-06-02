@@ -1,5 +1,5 @@
 <?php
-namespace HtSettingsModule\Factory;
+namespace HtSettingsModuleTest\Factory;
 
 use Zend\ServiceManager\ServiceManager;
 use HtSettingsModule\Options\ModuleOptions;

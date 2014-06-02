@@ -23,7 +23,7 @@ class SettingsManager implements SettingsManagerInterface
      * Constructor
      *
      * @param SettingsProviderInterface $settingsProvider
-     * @param SettingsServiceInterface $settingsService
+     * @param SettingsServiceInterface  $settingsService
      */
     public function __construct(SettingsProviderInterface $settingsProvider, SettingsServiceInterface $settingsService)
     {

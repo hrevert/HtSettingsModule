@@ -28,8 +28,8 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
     /**
      * Constructor
      *
-     * @param ModuleOptionsInterface  $options
-     * @param SettingsMapperInterface $settingsMapper
+     * @param ModuleOptionsInterface            $options
+     * @param SettingsMapperInterface           $settingsMapper
      * @param NamespaceHydratorProviderInerface $namespaceHydratorProvider
      */
     public function __construct(
@@ -76,7 +76,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
 
         if ($this->options->getCacheOptions()->isEnabled()) {
             $this->getCacheManager()->delete($namespace);
-            $this->getCacheManager()->create($namespace, $settings);            
+            $this->getCacheManager()->create($namespace, $settings);
         }
 
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $eventParams);
@@ -90,7 +90,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
         $eventParams = ['namespace' => $namespace, 'name' => $name, 'value' => $value];
         $this->getEventManager()->trigger(__FUNCTION__, $this, $eventParams);
         if ($this->options->getCacheOptions()->isEnabled()) {
-            $this->getCacheManager()->delete($namespace);            
+            $this->getCacheManager()->delete($namespace);
         }
         $parameter = $this->settingsMapper->findParameter($namespace, $name);
         if ($parameter) {
@@ -133,7 +133,7 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
     /**
      * Tries to detect namespace from modal class
      *
-     * @param  object                                              $settings
+     * @param  object                             $settings
      * @return string
      * @throws Exception\InvalidArgumentException
      */

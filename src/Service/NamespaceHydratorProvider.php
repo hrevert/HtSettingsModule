@@ -37,7 +37,7 @@ class NamespaceHydratorProvider implements NamespaceHydratorProviderInerface
                 if ($hydratorObject instanceof HydratorInterface) {
                     return $hydratorObject;
                 }
-            }            
+            }
         }
 
         throw new Exception\RuntimeException(sprintf(

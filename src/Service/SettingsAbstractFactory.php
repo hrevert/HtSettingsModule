@@ -16,6 +16,7 @@ class SettingsAbstractFactory implements AbstractFactoryInterface
         if (strpos($requestedName, static::PREFIX) === 0) {
             $options = $serviceLocator->get('HtSettingsModule\Options\ModuleOptions');
             $namespace = $this->getNamespace($requestedName);
+
             return $options->hasNamespace($namespace);
         }
 

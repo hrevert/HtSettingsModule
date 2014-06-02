@@ -17,7 +17,7 @@ interface SettingsManagerInterface
      * @param  string $namespace
      * @return array
      */
-    public function getSettingsArray($namespace); 
+    public function getSettingsArray($namespace);
 
     /**
      * Saves settings
@@ -33,7 +33,7 @@ interface SettingsManagerInterface
      *
      * @param  string $namespace
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function saveParameter($namespace, $name, $value);

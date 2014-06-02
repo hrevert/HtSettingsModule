@@ -10,11 +10,11 @@ interface CacheManagerAwareInterface
      * @return self
      */
     public function setCacheManager(CacheManagerInterface $cacheManager);
-    
+
     /**
      * Gets cacheManager
      *
      * @return CacheManagerInterface
      */
-    public function getCacheManager();        
+    public function getCacheManager();
 }

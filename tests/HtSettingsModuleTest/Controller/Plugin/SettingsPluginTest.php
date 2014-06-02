@@ -30,6 +30,6 @@ class SettingsPluginTest extends \PHPUnit_Framework_TestCase
             ->method('save')
             ->with($settings, 'network');
         $plugin = new SettingsPlugin($settingsManager);
-        $plugin->save($settings, 'network');        
+        $plugin->save($settings, 'network');
     }
 }

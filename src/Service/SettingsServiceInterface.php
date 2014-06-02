@@ -17,7 +17,7 @@ interface SettingsServiceInterface
      *
      * @param  string $namespace
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function saveParameter($namespace, $name, $value);

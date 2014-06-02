@@ -63,9 +63,9 @@ interface ParameterInterface
     /**
      * Creates a new entity
      *
-     * @param string $namespace
-     * @param string $name
-     * @param mixed $value
+     * @param  string $namespace
+     * @param  string $name
+     * @param  mixed  $value
      * @return static
      */
     public static function create($namespace, $name, $value);

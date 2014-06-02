@@ -26,8 +26,8 @@ class SettingsProvider implements SettingsProviderInterface, CacheManagerAwareIn
     /**
      * Constructor
      *
-     * @param ModuleOptionsInterface $options
-     * @param SettingsMapperInterface $settingsMapper
+     * @param ModuleOptionsInterface            $options
+     * @param SettingsMapperInterface           $settingsMapper
      * @param NamespaceHydratorProviderInerface $namespaceHydratorProvider
      */
     public function __construct(
