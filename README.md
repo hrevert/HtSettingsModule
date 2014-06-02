@@ -38,7 +38,7 @@ $settingsEntity = $this->getServiceLocator()->get('HtSettingsManager')->getSetti
 * Copy the file located in `vendor/hrevert/ht-settings-module/config/ht-settings-module.global.php` to `config/autoload` and change the values as you wish
 
 ## Docs
-The official documentation of HtSettingsModule is available in the [/docs](/docs) folder.
+The official documentation of HtSettingsModule is available in the [/docs](/docs) folder. Please read the [quickstart guide](/docs/quickstart.md) to quickly get your hands dirty with this module.
 
 ## Acknowledgements
 HtSettingsModule is inspired by [SyliusSettingsBundle](https://github.com/Sylius/SyliusSettingsBundle).
