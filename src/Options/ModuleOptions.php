@@ -4,7 +4,7 @@ namespace HtSettingsModule\Options;
 use Zend\Stdlib\AbstractOptions;
 use HtSettingsModule\Exception;
 
-class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, DbOptionsInterface
+class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, DbOptionsInterface, StorageOptionsInterface
 {
     /**
      * @var CacheOptionsInterface
@@ -25,6 +25,11 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
      * @var string
      */
     protected $parameterEntityClass = 'HtSettingsModule\Entity\Parameter';
+
+    /**
+     * @var string  Path to store settings if we want to store settings in xml, json etc.
+     */
+    protected $storagePath;
 
     /**
      * Sets options of cache
@@ -180,6 +185,28 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     public function setParameterEntityClass($parameterEntityClass)
     {
         $this->parameterEntityClass = $parameterEntityClass;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getStoragePath()
+    {
+        return $this->storagePath;
+    }
+
+    /**
+     * Sets storagePath
+     *
+     * @param  string $storagePath
+     * @throws Exception\InvalidPathException
+     * @return self
+     */
+    public function setStoragePath($storagePath)
+    {
+        $this->storagePath = $storagePath;
 
         return $this;
     }

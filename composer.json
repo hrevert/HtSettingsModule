@@ -26,13 +26,16 @@
         "zendframework/zend-cache": "~2.2",
         "zendframework/zend-modulemanager": "~2.2",
         "zendframework/zend-mvc": "~2.2",
-        "zendframework/zend-view": "~2.2"
+        "zendframework/zend-view": "~2.2",
+        "league/flysystem": "0.4.*",
+        "phine/test": "1.0.*"
     },
     "suggest": {
         "zendframework/zend-cache": "if you want to cache settings",
         "zendframework/zend-modulemanager": "To use it as a Zend Framework 2 module",
         "zendframework/zend-mvc": "To use with Zend Framework 2 MVC",
-        "zendframework/zend-view": "To use some view helpers"
+        "zendframework/zend-view": "To use some view helpers",
+        "league/flysystem": "If you want to use xml/json storage adapters provided by this module"
     },
     "autoload": {
         "psr-4": {
