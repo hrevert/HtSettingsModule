@@ -29,7 +29,8 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
                 'enabled' => true,
                 'namespaces' => ['theme'],
                 'adapter' => 'Zend\Cache\Storage\Adapter\Memcached',
-            ]
+            ],
+            'storage_path' => 'data/settings',
         ]);
 
         $this->assertEquals('app_settings', $options->getSettingsTable());
@@ -54,6 +55,8 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
 
         $networkOptions = $options->getNamespaceOptions('network');
         $this->assertInstanceOf('ArrayObject', $networkOptions->getEntityPrototype());
+
+        $this->assertEquals('data/settings', $options->getStoragePath());
     }
 
     public function testGetExceptionWithInvalidNamespace()

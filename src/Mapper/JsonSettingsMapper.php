@@ -24,8 +24,8 @@ class JsonSettingsMapper implements SettingsMapperInterface
     /**
      * Constructor
      *
-     * @param string             $storagePath
-     * @param ParameterInterface $entityPrototype
+     * @param FilesystemInterface   $fileSystem
+     * @param ParameterInterface    $entityPrototype
      */
     public function __construct(FilesystemInterface $fileSystem, ParameterInterface $entityPrototype)
     {
@@ -114,6 +114,9 @@ class JsonSettingsMapper implements SettingsMapperInterface
 
     /**
      * Reads settings content of a namespace
+     *
+     * @param string $namespace
+     * @return array
      */
     protected function read($namespace)
     {
@@ -127,6 +130,10 @@ class JsonSettingsMapper implements SettingsMapperInterface
 
     /**
      * Write settings content of a namespace
+     *
+     * @param string    $namespace
+     * @param array     $data
+     * @return          void 
      */
     protected function write($namespace, array $data)
     {
