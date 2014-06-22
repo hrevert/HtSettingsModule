@@ -8,5 +8,5 @@ interface StorageOptionsInterface
      *
      * @return string
      */
-    public function getStoragePath();    
+    public function getStoragePath();
 }

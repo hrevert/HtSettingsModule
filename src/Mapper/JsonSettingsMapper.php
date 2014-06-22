@@ -24,21 +24,21 @@ class JsonSettingsMapper implements SettingsMapperInterface
     /**
      * Constructor
      *
-     * @param string $storagePath
+     * @param string             $storagePath
      * @param ParameterInterface $entityPrototype
-     */	
-	public function __construct(FilesystemInterface $fileSystem, ParameterInterface $entityPrototype)
-	{
-		$this->fileSystem = $fileSystem;
+     */
+    public function __construct(FilesystemInterface $fileSystem, ParameterInterface $entityPrototype)
+    {
+        $this->fileSystem = $fileSystem;
         $this->entityPrototype = $entityPrototype;
-	}
-	
+    }
+
     /**
      * {@inheritDoc}
-     */	
-	public function findByNamespace($namespace)
-	{
-	    $data = $this->read($namespace);
+     */
+    public function findByNamespace($namespace)
+    {
+        $data = $this->read($namespace);
         $parameters = [];
         foreach ($data as $name => $value) {
             $parameter = clone $this->entityPrototype;
@@ -49,7 +49,7 @@ class JsonSettingsMapper implements SettingsMapperInterface
         }
 
         return $parameters;
-	}
+    }
 
     /**
      * {@inheritDoc}
@@ -88,8 +88,9 @@ class JsonSettingsMapper implements SettingsMapperInterface
         if ($parameter instanceof ParameterInterface) {
             $namespace = $parameter->getNamespace();
             $name = $parameter->getName();
-            $data = $this->read($namespace);  
+            $data = $this->read($namespace);
             $parameter->setValue($data[$name]);
+
             return $parameter;
         } elseif (!is_string($parameter)) {
             throw new Exception\InvalidArgumentException(
@@ -98,32 +99,31 @@ class JsonSettingsMapper implements SettingsMapperInterface
                     __METHOD__,
                     is_object($parameter) ? get_class($parameter) : gettype($parameter)
                 )
-            );            
+            );
         }
 
         $namespace = $parameter;
-        $data = $this->read($namespace);  
+        $data = $this->read($namespace);
         $parameter = clone $this->entityPrototype;
         $parameter->setName($name);
         $parameter->setValue($data[$name]);
         $parameter->setNamespace($namespace);
-        
-        return $parameter;             
+
+        return $parameter;
     }
-	
 
     /**
      * Reads settings content of a namespace
      */
-	protected function read($namespace)
-	{
-		$file = $this->getFile($namespace);
+    protected function read($namespace)
+    {
+        $file = $this->getFile($namespace);
         if (!$this->fileSystem->has($file)) {
             return [];
         }
 
-		return $this->onRead($this->fileSystem->read($file));
-	}
+        return $this->onRead($this->fileSystem->read($file));
+    }
 
     /**
      * Write settings content of a namespace
@@ -148,9 +148,9 @@ class JsonSettingsMapper implements SettingsMapperInterface
     {
         return Json::decode($contents, Json::TYPE_ARRAY);
     }
-	
-	protected function getFile($namespace)
-	{
-		return 'ht-settings-' . $namespace . '.json'; 
-	}
+
+    protected function getFile($namespace)
+    {
+        return 'ht-settings-' . $namespace . '.json';
+    }
 }

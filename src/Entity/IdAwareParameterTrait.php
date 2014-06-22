@@ -9,7 +9,7 @@ trait IdAwareParameterTrait
      * @var int
      */
     protected $id;
-    
+
     /**
      * Sets Parameter id
      *
@@ -31,5 +31,5 @@ trait IdAwareParameterTrait
     public function getId()
     {
         return $this->id;
-    }        
+    }
 }

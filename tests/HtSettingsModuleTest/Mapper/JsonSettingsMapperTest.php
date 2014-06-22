@@ -11,12 +11,12 @@ class JsonSettingsMapperTest extends \PHPUnit_Framework_TestCase
     public function testFindByNamespace()
     {
         $fileSystem = $this->getMock('League\Flysystem\FilesystemInterface');
-        $mapper = new JsonSettingsMapper($fileSystem, new Parameter);  
-        
+        $mapper = new JsonSettingsMapper($fileSystem, new Parameter);
+
         $fileSystem->expects($this->exactly(1))
             ->method('has')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'football.json')
-            ->will($this->returnValue(true));     
+            ->will($this->returnValue(true));
         $fileSystem->expects($this->exactly(1))
             ->method('read')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'football.json')
@@ -51,39 +51,39 @@ class JsonSettingsMapperTest extends \PHPUnit_Framework_TestCase
         $fileSystem->expects($this->exactly(2))
             ->method('has')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'theme.json')
-            ->will($this->returnValue(true));     
+            ->will($this->returnValue(true));
         $fileSystem->expects($this->once())
             ->method('read')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'theme.json')
             ->will($this->returnValue(Json::encode(['color' => 'red', 'font' => 'Arial'])));
         $fileSystem->expects($this->once())
             ->method('update')
-            ->with(JsonSettingsMapper::FILE_PREFIX . 'theme.json', Json::encode(['font' => 'Arial']));  
-        $mapper->deleteParameter($parameter);               
+            ->with(JsonSettingsMapper::FILE_PREFIX . 'theme.json', Json::encode(['font' => 'Arial']));
+        $mapper->deleteParameter($parameter);
     }
 
     public function testFindParameter()
     {
         $fileSystem = $this->getMock('League\Flysystem\FilesystemInterface');
-        $mapper = new JsonSettingsMapper($fileSystem, new Parameter);  
-        
+        $mapper = new JsonSettingsMapper($fileSystem, new Parameter);
+
         $fileSystem->expects($this->exactly(2))
             ->method('has')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'football.json')
-            ->will($this->returnValue(true));     
+            ->will($this->returnValue(true));
         $fileSystem->expects($this->exactly(2))
             ->method('read')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'football.json')
-            ->will($this->returnValue(Json::encode(['team' => 'Liverpool', 'boot' => 'Addidas'])));  
-            
+            ->will($this->returnValue(Json::encode(['team' => 'Liverpool', 'boot' => 'Addidas'])));
+
         $parameter = new Parameter;
         $parameter->setName('team');
         $parameter->setNamespace('football');
-        
-        $newParameter = $mapper->findParameter($parameter);  
-        $this->assertEquals('Liverpool', $parameter->getValue());   
 
-        $newParameter = $mapper->findParameter('football', 'team');  
+        $newParameter = $mapper->findParameter($parameter);
+        $this->assertEquals('Liverpool', $parameter->getValue());
+
+        $newParameter = $mapper->findParameter('football', 'team');
         $this->assertEquals('Liverpool', $parameter->getValue());
 
         $this->setExpectedException('HtSettingsModule\Exception\InvalidArgumentException');
@@ -93,41 +93,41 @@ class JsonSettingsMapperTest extends \PHPUnit_Framework_TestCase
     public function testRead()
     {
         $fileSystem = $this->getMock('League\Flysystem\FilesystemInterface');
-        $mapper = new JsonSettingsMapper($fileSystem, new Parameter);  
+        $mapper = new JsonSettingsMapper($fileSystem, new Parameter);
 
         $this->assertEquals([], Method::invoke($mapper, 'read', 'cricket'));
-        
+
         $fileSystem->expects($this->once())
             ->method('has')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'cricket.json')
-            ->will($this->returnValue(true));     
+            ->will($this->returnValue(true));
         $fileSystem->expects($this->once())
             ->method('read')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'cricket.json')
-            ->will($this->returnValue(Json::encode(['team' => 'New South Wales', 'bat' => 'Addidas'])));   
-            
-        $this->assertEquals(['team' => 'New South Wales', 'bat' => 'Addidas'], Method::invoke($mapper, 'read', 'cricket'));                          
+            ->will($this->returnValue(Json::encode(['team' => 'New South Wales', 'bat' => 'Addidas'])));
+
+        $this->assertEquals(['team' => 'New South Wales', 'bat' => 'Addidas'], Method::invoke($mapper, 'read', 'cricket'));
     }
 
     public function testWrite()
     {
         $fileSystem = $this->getMock('League\Flysystem\FilesystemInterface');
-        $mapper = new JsonSettingsMapper($fileSystem, new Parameter); 
+        $mapper = new JsonSettingsMapper($fileSystem, new Parameter);
         $fileSystem->expects($this->once())
             ->method('write')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'cricket.json', Json::encode(['team' => 'New South Wales', 'bat' => 'Addidas']));
-        
-        Method::invokeArgs($mapper, 'write', ['cricket', ['team' => 'New South Wales', 'bat' => 'Addidas']]);   
-        
+
+        Method::invokeArgs($mapper, 'write', ['cricket', ['team' => 'New South Wales', 'bat' => 'Addidas']]);
+
         $fileSystem->expects($this->once())
             ->method('has')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'cricket.json')
             ->will($this->returnValue(true));
-            
+
         $fileSystem->expects($this->once())
             ->method('update')
             ->with(JsonSettingsMapper::FILE_PREFIX . 'cricket.json', Json::encode(['team' => 'New South Wales', 'bat' => 'Addidas']));
-        
+
         Method::invokeArgs($mapper, 'write', ['cricket', ['team' => 'New South Wales', 'bat' => 'Addidas']]);
     }
 }

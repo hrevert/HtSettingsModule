@@ -200,7 +200,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * Sets storagePath
      *
-     * @param  string $storagePath
+     * @param  string                         $storagePath
      * @throws Exception\InvalidPathException
      * @return self
      */
