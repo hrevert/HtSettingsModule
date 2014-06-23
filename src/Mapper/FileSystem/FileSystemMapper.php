@@ -1,16 +1,13 @@
 <?php
-namespace HtSettingsModule\Mapper;
+namespace HtSettingsModule\Mapper\FileSystem;
 
 use HtSettingsModule\Entity\ParameterInterface;
 use HtSettingsModule\Exception;
-use Zend\Json\Json;
 use League\Flysystem\FilesystemInterface;
+use HtSettingsModule\Mapper\SettingsMapperInterface;
 
-class JsonSettingsMapper implements SettingsMapperInterface
+class FileSystemMapper implements SettingsMapperInterface
 {
-
-    const FILE_PREFIX = 'ht-settings-';
-
     /**
      * @var ParameterInterface
      */
@@ -22,15 +19,21 @@ class JsonSettingsMapper implements SettingsMapperInterface
     protected $fileSystem;
 
     /**
+     * @var Adapter\AdapterInterface
+     */
+    protected $adapter;
+
+    /**
      * Constructor
      *
-     * @param FilesystemInterface   $fileSystem
-     * @param ParameterInterface    $entityPrototype
+     * @param FilesystemInterface $fileSystem
+     * @param ParameterInterface  $entityPrototype
      */
-    public function __construct(FilesystemInterface $fileSystem, ParameterInterface $entityPrototype)
+    public function __construct(FilesystemInterface $fileSystem, ParameterInterface $entityPrototype, Adapter\AdapterInterface $adapter)
     {
         $this->fileSystem = $fileSystem;
         $this->entityPrototype = $entityPrototype;
+        $this->adapter = $adapter;
     }
 
     /**
@@ -115,49 +118,34 @@ class JsonSettingsMapper implements SettingsMapperInterface
     /**
      * Reads settings content of a namespace
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return array
      */
     protected function read($namespace)
     {
-        $file = $this->getFile($namespace);
+        $file = $this->adapter->getFileName($namespace);
         if (!$this->fileSystem->has($file)) {
             return [];
         }
 
-        return $this->onRead($this->fileSystem->read($file));
+        return $this->adapter->onRead($this->fileSystem->read($file));
     }
 
     /**
      * Write settings content of a namespace
      *
-     * @param string    $namespace
-     * @param array     $data
-     * @return          void 
+     * @param  string $namespace
+     * @param  array  $data
+     * @return void
      */
     protected function write($namespace, array $data)
     {
-        $file = $this->getFile($namespace);
-        $contents = $this->prepareForWriting($data);
+        $file = $this->adapter->getFileName($namespace);
+        $contents = $this->adapter->prepareForWriting($data);
         if (!$this->fileSystem->has($file)) {
             $this->fileSystem->write($file, $contents);
         }
 
         $this->fileSystem->update($file, $contents);
-    }
-
-    protected function prepareForWriting(array $data)
-    {
-        return Json::encode($data);
-    }
-
-    protected function onRead($contents)
-    {
-        return Json::decode($contents, Json::TYPE_ARRAY);
-    }
-
-    protected function getFile($namespace)
-    {
-        return 'ht-settings-' . $namespace . '.json';
     }
 }
