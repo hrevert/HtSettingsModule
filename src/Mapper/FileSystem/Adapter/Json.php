@@ -14,7 +14,7 @@ class Json implements AdapterInterface
     /**
      * {@inheritDoc}
      */
-    protected function onRead($contents)
+    public function onRead($contents)
     {
         return \Zend\Json\Json::decode($contents, \Zend\Json\Json::TYPE_ARRAY);
     }
@@ -22,7 +22,7 @@ class Json implements AdapterInterface
     /**
      * {@inheritDoc}
      */
-    protected function getFileName($namespace)
+    public function getFileName($namespace)
     {
         return 'ht-settings-' . $namespace . '.json';
     }

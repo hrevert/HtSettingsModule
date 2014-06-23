@@ -11,6 +11,8 @@ return [
             'HtSettingsModule\Service\SettingsService'=> 'HtSettingsModule\Factory\SettingsServiceFactory',
             'HtSettingsModule\Service\NamespaceHydratorProvider'=> 'HtSettingsModule\Factory\NamespaceHydratorProviderFactory',
             'HtSettingsModule\Manager\SettingsManager'=> 'HtSettingsModule\Factory\SettingsManagerFactory',
+            'HtSettingsModule\FileSystemStorage' => 'HtSettingsModule\Factory\FileSystemStorageFactory',
+            'HtSettingsModule\Mapper\JsonSettingsMapper' => 'HtSettingsModule\Factory\JsonSettingsMapperFactory',
         ],
         'aliases' => [
             'HtSettingsModule\DbAdapter' => 'Zend\Db\Adapter\Adapter',
