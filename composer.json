@@ -26,6 +26,7 @@
         "league/flysystem": "0.4.*",
         "phine/test": "1.0.*",
         "zendframework/zend-cache": "~2.2",
+        "zendframework/zend-config": "~2.2",
         "zendframework/zend-json": "~2.2",
         "zendframework/zend-modulemanager": "~2.2",
         "zendframework/zend-mvc": "~2.2",
@@ -35,6 +36,7 @@
     "suggest": {
         "league/flysystem": "If you want to use xml/json storage adapters provided by this module",
         "zendframework/zend-cache": "if you want to cache settings",
+        "zendframework/zend-config": "If you want to use xml storage adapter",
         "zendframework/zend-json": "If you want to use json storage adapter",
         "zendframework/zend-modulemanager": "To use it as a Zend Framework 2 module",
         "zendframework/zend-mvc": "To use with Zend Framework 2 MVC",
