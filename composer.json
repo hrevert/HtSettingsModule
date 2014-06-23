@@ -28,6 +28,7 @@
         "zendframework/zend-mvc": "~2.2",
         "zendframework/zend-view": "~2.2",
         "league/flysystem": "0.4.*",
+        "zendframework/zend-json": "~2.2",
         "phine/test": "1.0.*"
     },
     "suggest": {
@@ -35,6 +36,7 @@
         "zendframework/zend-modulemanager": "To use it as a Zend Framework 2 module",
         "zendframework/zend-mvc": "To use with Zend Framework 2 MVC",
         "zendframework/zend-view": "To use some view helpers",
+        "zendframework/zend-json": "If you want to use json storage adapter",
         "league/flysystem": "If you want to use xml/json storage adapters provided by this module"
     },
     "autoload": {
