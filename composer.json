@@ -6,7 +6,8 @@
         "zf2",
         "module",
         "zendframework",
-        "settings"
+        "settings",
+        "hrevert"
     ],
     "license": "MIT",
     "homepage": "https://github.com/hrevert/HtSettingsModule",
@@ -19,25 +20,26 @@
     "require": {
         "php": ">=5.4",
         "zendframework/zend-servicemanager": "~2.2",
-        "zendframework/zend-stdlib": "~2.2",
-        "zf-commons/zfc-base": "0.1.*"
+        "zendframework/zend-stdlib": "~2.2"
     },
     "require-dev": {
+        "league/flysystem": "0.4.*",
+        "phine/test": "1.0.*",
         "zendframework/zend-cache": "~2.2",
+        "zendframework/zend-json": "~2.2",
         "zendframework/zend-modulemanager": "~2.2",
         "zendframework/zend-mvc": "~2.2",
         "zendframework/zend-view": "~2.2",
-        "league/flysystem": "0.4.*",
-        "zendframework/zend-json": "~2.2",
-        "phine/test": "1.0.*"
+        "zf-commons/zfc-base": "0.1.*"
     },
     "suggest": {
+        "league/flysystem": "If you want to use xml/json storage adapters provided by this module",
         "zendframework/zend-cache": "if you want to cache settings",
+        "zendframework/zend-json": "If you want to use json storage adapter",
         "zendframework/zend-modulemanager": "To use it as a Zend Framework 2 module",
         "zendframework/zend-mvc": "To use with Zend Framework 2 MVC",
         "zendframework/zend-view": "To use some view helpers",
-        "zendframework/zend-json": "If you want to use json storage adapter",
-        "league/flysystem": "If you want to use xml/json storage adapters provided by this module"
+        "zf-commons/zfc-base": "if you want to use Zend\\Db for settings persistence"
     },
     "autoload": {
         "psr-4": {

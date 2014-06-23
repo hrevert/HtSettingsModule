@@ -29,7 +29,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface, D
     /**
      * @var string  Path to store settings if we want to store settings in xml, json etc.
      */
-    protected $storagePath;
+    protected $storagePath = 'data/settings';
 
     /**
      * Sets options of cache
