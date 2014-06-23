@@ -13,6 +13,7 @@ return [
             'HtSettingsModule\Manager\SettingsManager'=> 'HtSettingsModule\Factory\SettingsManagerFactory',
             'HtSettingsModule\FileSystemStorage' => 'HtSettingsModule\Factory\FileSystemStorageFactory',
             'HtSettingsModule\Mapper\JsonSettingsMapper' => 'HtSettingsModule\Factory\JsonSettingsMapperFactory',
+            'HtSettingsModule\Mapper\XmlSettingsMapper' => 'HtSettingsModule\Factory\XmlSettingsMapperFactory',
         ],
         'aliases' => [
             'HtSettingsModule\DbAdapter' => 'Zend\Db\Adapter\Adapter',
