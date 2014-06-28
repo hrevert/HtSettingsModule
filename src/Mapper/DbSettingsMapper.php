@@ -3,9 +3,10 @@ namespace HtSettingsModule\Mapper;
 
 use ZfcBase\Mapper\AbstractDbMapper;
 use HtSettingsModule\Entity\ParameterInterface;
+use HtSettingsModule\Entity\IdAwareParameterInterface;
 use HtSettingsModule\Exception;
 
-class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
+class DbSettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
 {
     /**
      * {@inheritDoc}
@@ -25,7 +26,9 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
     public function insertParameter(ParameterInterface $parameter)
     {
         $result = $this->insert($parameter);
-        $parameter->setId($result->getGeneratedValue());
+        if ($parameter instanceof IdAwareParameterInterface) {
+            $parameter->setId($result->getGeneratedValue());
+        }
     }
 
     /**
@@ -79,7 +82,7 @@ class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
      */
     protected function getWhereFromParameter(ParameterInterface $parameter)
     {
-        if ($parameter->getId()) {
+        if ($parameter instanceof IdAwareParameterInterface && $parameter->getId()) {
             return ['id' => $parameter->getId()];
         } else {
             return ['namespace' => $parameter->getNamespace(), 'name' => $parameter->getName()];

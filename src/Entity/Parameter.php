@@ -4,13 +4,6 @@ namespace HtSettingsModule\Entity;
 class Parameter implements ParameterInterface
 {
     /**
-     * Parameter id.
-     *
-     * @var int
-     */
-    protected $id;
-
-    /**
      * Parameter settings namespace.
      *
      * @var string
@@ -49,24 +42,6 @@ class Parameter implements ParameterInterface
         if ($value !== null) {
             $this->setValue($value);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -126,13 +101,12 @@ class Parameter implements ParameterInterface
     /**
      * {@inheritdoc}
      */
-    public static function create($namespace, $name, $value = null, $id = null)
+    public static function create($namespace, $name, $value = null)
     {
         $parameter = new static;
         $parameter->setNamespace($namespace);
         $parameter->setName($name);
         $parameter->setValue($value);
-        $parameter->setId($id);
 
         return $parameter;
     }

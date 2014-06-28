@@ -146,6 +146,6 @@ class SettingsService extends EventProvider implements SettingsServiceInterface,
             }
         }
 
-        throw new Exception\InvalidArgumentException('Unknows Settings namespace');
+        throw new Exception\InvalidArgumentException('Unknown Settings namespace');
     }
 }
