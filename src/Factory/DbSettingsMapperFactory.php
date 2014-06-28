@@ -3,20 +3,20 @@ namespace HtSettingsModule\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use HtSettingsModule\Mapper\SettingsMapper;
+use HtSettingsModule\Mapper\DbSettingsMapper;
 
-class SettingsMapperFactory implements FactoryInterface
+class DbSettingsMapperFactory implements FactoryInterface
 {
     /**
      * Gets settings mapper
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return SettingsMapper
+     * @return DbSettingsMapper
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $options = $serviceLocator->get('HtSettingsModule\Options\ModuleOptions');
-        $mapper = new SettingsMapper();
+        $mapper = new DbSettingsMapper();
         $mapper->setDbAdapter($serviceLocator->get('HtSettingsModule\DbAdapter'));
         $entityClass = $options->getParameterEntityClass();
         $mapper->setEntityPrototype(new $entityClass);

@@ -6,7 +6,7 @@ use HtSettingsModule\Entity\ParameterInterface;
 use HtSettingsModule\Entity\IdAwareParameterInterface;
 use HtSettingsModule\Exception;
 
-class SettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
+class DbSettingsMapper extends AbstractDbMapper implements SettingsMapperInterface
 {
     /**
      * {@inheritDoc}
