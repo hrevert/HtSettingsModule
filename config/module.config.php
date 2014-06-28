@@ -5,7 +5,6 @@ return [
     'service_manager' => [
         'factories' => [
             'HtSettingsModule\Options\ModuleOptions' => 'HtSettingsModule\Factory\ModuleOptionsFactory',
-            'HtSettingsModule_SettingsMapper' => 'HtSettingsModule\Factory\SettingsMapperFactory',
             'HtSettingsModule\Service\CacheManager'=> 'HtSettingsModule\Factory\CacheManagerFactory',
             'HtSettingsModule\Service\SettingsProvider'=> 'HtSettingsModule\Factory\SettingsProviderFactory',
             'HtSettingsModule\Service\SettingsService'=> 'HtSettingsModule\Factory\SettingsServiceFactory',
