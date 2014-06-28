@@ -32,7 +32,7 @@ $settingsEntity = $this->getServiceLocator()->get('HtSettingsManager')->getSetti
 ```
 
 ## Installation
-* Add `"hrevert/ht-settings-module": "0.0.*"` to composer.json and run `php composer.phar update`
+* Add `"hrevert/ht-settings-module": "0.1.*"` to composer.json and run `php composer.phar update`
 * Register `HtSettingsModule` as module in `config/application.config.php`
 * Copy the file located in `vendor/hrevert/ht-settings-module/config/ht-settings-module.global.php` to `config/autoload` and change the values as you wish
 * Read [this](/docs/storage-adapters.md) for setting up a storage adapter
