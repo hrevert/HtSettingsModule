@@ -86,7 +86,14 @@ $options = [
          * If empty, settings of each namespace can be cached
          */
         //'namespaces' => []
-    ]
+    ],
+
+    /**
+     * Settings storage path for XML\Json adapter
+     *
+     * You need to specify this if you want to use XML\Json storage adapter
+     */
+    // 'storage_path' => 'data/settings',
 
 ];
 
