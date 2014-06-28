@@ -5,7 +5,18 @@ Storage Adapters
 Use this adapter if you want to use `Zend\Db` for settings persistence.
 
 #### How
-Import the MySQL schema located in `vendor/hrevert/ht-settings-module/data/schema.sql` if you use MySQL.
+1. Import the MySQL schema located in `vendor/hrevert/ht-settings-module/data/schema.sql` if you use MySQL.
+2. Install [ZfcBase](https://github.com/ZF-Commons/ZfcBase) by adding `"zf-commons/zfc-base": "0.1.*"` to require section of composer.json
+3. Add the following config:
+```php
+return [
+    'ht_settings' => [
+        // This is optional.
+        // You can specify this is config/autoload/ht-settings-module.global.php
+        'parameter_entity_class' => 'HtSettingsModule\Entity\IdAwareParameter',
+    ]
+];
+```
 
 ## XML Adapter
 Use this adapter if you want to store settings in XML format.
