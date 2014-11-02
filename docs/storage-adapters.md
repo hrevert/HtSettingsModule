@@ -28,7 +28,7 @@ Use this adapter if you want to store settings in XML format.
 return [
     'ht_settings' => [
         // This is optional.
-        // You can specify this is config/autoload/ht-settings-module.global.php
+        // You can specify this in config/autoload/ht-settings-module.global.php
         'storage_path' => 'data/settings',
     ],
     'service_manager' => [
@@ -49,7 +49,7 @@ Use this adapter if you want to store settings in JSON format.
 return [
     'ht_settings' => [
         // This is optional.
-        // You can specify this is config/autoload/ht-settings-module.global.php
+        // You can specify this in config/autoload/ht-settings-module.global.php
         'storage_path' => 'data/settings',
     ],
     'service_manager' => [
